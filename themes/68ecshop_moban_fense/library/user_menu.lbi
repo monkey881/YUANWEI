@@ -1,0 +1,72 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div style="background-image: url(images/category.jpg); height:26px;"><span style=" margin-left: 40px;  font-size:16px; color:white; padding-top:5px; font-weight:bold; line-height:25px;">我的原味生活</span></div>
+
+<div class="cagegoryCon clearfix" style="padding: 10px 0 10px 8px;
+border-left: 1px solid #d0cece;
+border-right: 1px solid #d0cece;
+background-color: #faf7ef;">
+
+<div class="userMenu">
+
+ <script>
+    function show(c_Str)
+    {if(document.all(c_Str).style.display=='none')
+    {document.all(c_Str).style.display='block';}
+    else{document.all(c_Str).style.display='none';}}
+    function high(){
+    if (event.srcElement.className=="k"){
+    event.srcElement.style.background="336699"
+    event.srcElement.style.color="white"
+    }
+    }
+    function low(){
+    if (event.srcElement.className=="k"){
+    event.srcElement.style.background="99CCFF"
+    event.srcElement.style.color=""
+    }
+    }
+    </script>
+
+    <div class=up onclick=show("a1") style="width: 176px;height: 26px;line-height: 26px;background-color: #f3f3f3;border: 1px solid #d0cece; margin-left:-18px; padding-left:20px; font-weight:bold;">
+    <a href="#">会员信息</a><img src="images/rmenue.png" style="float:right; margin-top:5px;"></div>
+    <div onmouseover=high() onmouseout=low()  id=a1 style="display:block;color:#000; font-weight:100;">
+
+ <li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php" {if $action eq 'default'}class="curs"{/if}> {$lang.label_welcome}</a> </li>
+
+
+
+<li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php?act=comment_list"{if $action eq 'comment_list'}class="curs"{/if}> {$lang.label_comment}</a> </li>
+
+
+<!--<li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php?act=peisong" {if $action eq 'peisong'}class="curs"{/if}> {$lang.label_peisong}</a> </li>-->
+
+<li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php?act=collection_list"{if $action eq 'collection_list'}class="curs"{/if}> {$lang.label_collection}</a> </li>
+
+<li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php?act=profile"{if $action eq 'profile'}class="curs"{/if}> {$lang.label_profile}</a> </li>
+
+<li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php?act=message_list"{if $action eq 'message_list'}class="curs"{/if}> {$lang.label_message}</a> </li>
+
+<li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php?act=booking_list"{if $action eq 'booking_list'}class="curs"{/if}> {$lang.label_booking}</a> </li>
+
+<li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php?act=good_food"{if $action eq 'good_food'}class="curs"{/if}> 分享我的美食</a> </li>
+<li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php?act=vote"{if $action eq 'vote'}class="curs"{/if}>原味调查</a> </li>
+<!--<a href="user.php?act=group_buy">{$lang.label_group_buy}</a>-->
+
+</div>
+
+<div class=up onclick=show("a2") style="width: 176px;height: 26px;line-height: 26px;background-color: #f3f3f3;border: 1px solid #d0cece; margin-left:-18px; padding-left:20px; font-weight:bold;">
+    <a href="#">套餐管理</a><img src="images/rmenue.png" style="float:right; margin-top:5px;"></div>
+    <div onmouseover=high() onmouseout=low()  id=a2 style="display:block;color:#000;">
+    
+    <li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php?act=taocan" {if $action eq 'taocan'}class="curs"{/if}> {$lang.label_taocan}</a> </li>
+    
+    <li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php?act=address_list"{if $action eq 'address_list'}class="curs"{/if}> {$lang.label_address}</a> </li>
+
+<li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php?act=order_list"{if $action eq 'order_list'|| $action eq 'order_detail'}class="curs"{/if}> {$lang.label_order}</a> </li>
+
+    
+    
+    </div>
+    </div>
+
+</div>

@@ -1,0 +1,87 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <!--二次开发设计图片 -->
+  <div style="margin-bottom:10px; margin-top:10px; text-align:left; color:#FFBF85;" align="left" >
+    <p>&nbsp;</p>
+    <p><a href="../article.php?id=43" target="_banket">
+      <img src="images/oneminute.gif" alt="原味生活的特点" width="180" height="88" style=" border-width:3px; border-color:#FFBF85" />
+    </a></p>
+</div>
+    <!--二次开发设计图片 -->
+  <div style="margin-bottom:10px; margin-top:10px; text-align:left" align="center" >
+    <a href="brand.php" target="_banket">
+        <img src="images/liangnong.gif" width="180" height="80" alt="“良心农”" style=" border-width:3px; border-color:#FFBF85" />
+<span style="text-align: right"></span></div>
+    <!--二次开发设计图片 -->
+  <div style="margin-bottom:10px; margin-top:10px; text-align:left" align="center" >
+    <a href="../article.php?id=45" target="_banket">
+        <img src="images/anquan.gif" width="180" height="80" alt="消费者监督沙龙"  style=" border-width:3px; border-color:#FFBF85" />
+  </div>
+<div style="margin-top:10px; margin-bottom:5px;" align="center;">
+    <img src="images/safe.gif" alt="安全高质" width="57" height="21" border="0" align="left" style=" vertical-align:top;" />&nbsp;<span style="color:#F60; font-size: 15px; vertical-align:top;">的 <a href="#" style="margin: auto; color:red; font-size:18px; font-weight: bold;vertical-align:top;" >{$goods_category_num}</a><span style="color:#F60; font-size: 15px; vertical-align: top;"> 个品种</span></span>
+  </div>
+<div class="mod1 mod2 blank" id="historybox">
+    <span class="lb"></span><span class="rb"></span>
+<div class="cagegoryCon clearfix">
+
+<div class="left_nav_content">
+<ul class="nav_xlm">
+          
+        <li class="fa_xlm"  onmouseover="this.style.background='#FD7F02'" onmouseout="this.style.background='white'"><a href="article.php?id=49" style="font-size:14px;color:black;"><img src="../images/jh.jpg" width="22" height="22" alt="计划" style="margin-left:1px; margin-right:2px; vertical-align: text-bottom;"/>2013年蔬菜收获计划</a></li>
+    </ul>
+   
+<!--{foreach from=get_categories_tree() item=cat name=name}-->
+    <ul class="nav_xlm">
+     {if $cat.id eq 16}
+     <li class="fa_xlm" onmouseover="this.style.background='#FD7F02'" onmouseout="this.style.background='#ffffff'"><img src="../images/tuijian.jpg" width="22" height="22" alt="推荐" style="vertical-align:bottom;" >{$cat.name|escape:html}</li>
+     
+     {else}
+        <li class="fa_xlm" onmouseover="this.style.background='#FD7F02'" onmouseout="this.style.background='#ffffff'"><img src="../images/left_menu{$cat.id}.jpg" width="22" height="22" style="margin-left:1px; margin-right:2px; vertical-align: text-bottom;" />{$cat.name|escape:html}</li> 
+        {/if}   
+         <!--{if $cat.cat_id && $cat.id eq 6}-->   
+          <!--{foreach name=childs from=$cat.cat_id item=child}-->
+        <li class="son_xlm" onmouseover="this.style.background='#FD7F02'" onmouseout="this.style.background='#eeeeee'"> <a href="{$child.url}" title="{$child.name|escape:html}" ><p><img src="../images/folder4.gif" id="lmenu_block_300img" border="0" width="16" height="11">{$child.name|escape:html}</p></a></li>
+    <!--{/foreach}-->
+    
+    <!--{elseif $cat.cat_id && $cat.id eq 16}-->   
+          <!--{foreach name=childs from=$cat.cat_id item=child}-->
+         <li class="son_xlm" onmouseover="this.style.background='#FD7F02'" onmouseout="this.style.background='#ffeee6'" style="background:#ffeee6"> <a href="{$child.url}" title="{$child.name|escape:html}" ><p><img src="../images/folder4.gif" id="lmenu_block_300img" border="0" width="16" height="11"><!--{if $child.id eq 76}-->
+ <img src="../images/lf.png" width="22" height="22" style="margin-left:-1px; margin-right:0px; vertical-align: text-bottom;" />
+ <!--{/if}--><font color="#62120b">{$child.name|escape:html}</font></a></li>
+    <!--{/foreach}-->
+    
+     <!--{else}-->
+        <!--{foreach name=childs from=$cat.cat_id item=child}-->
+        <li class="son_xlm" onmouseover="this.style.background='#FD7F02'" onmouseout="this.style.background='#eeeeee'"> <a href="{$child.url}" title="{$child.name|escape:html}" ><p><img src="../images/folder4.gif" id="lmenu_block_300img" border="0" width="16" height="11">
+        {$child.name|escape:html}</p></a></li>
+    <!--{/foreach}-->
+    <!--{/if}-->
+    </ul>
+    <!--{/foreach}-->
+     
+</div>
+    <div style="margin-bottom:10px; margin-top:10px; text-align:center" align="center" >
+
+ <a href="../picshow" target="_blank"/>
+        <img src="../images/bz.jpg" width="171" height="68" alt="壁纸" title="原味调色板壁纸库"/>
+    <a href="../zhaomu" target="_blank"/>
+        <img src="../images/zhaomu.gif" width="171" height="85" alt="招募" title="原味生活招募"/>
+       
+  </div>
+
+</div>
+<div class="blank"></div>
+</div>
+
+
+<script type="text/javascript">
+
+$$(document).ready(function(){
+	
+            $$('.nav_xlm:eq(0) li.fa_xlm').css("background","white");
+            $$('.fa_xlm').css("background","");
+            $$('.nav_xlm li.son_xlm').css("display","block");
+        $$('.fa_xlm').click(function(){
+            $$(this).parent().find('.son_xlm').toggle();
+        });	
+});
+</script>

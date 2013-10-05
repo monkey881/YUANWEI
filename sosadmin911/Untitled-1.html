@@ -1,0 +1,683 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title>ECSHOP 管理中心</title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/general.css" rel="stylesheet" type="text/css" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../js/transport.js"></script><script type="text/javascript" src="js/common.js"></script><script language="JavaScript">
+<!--
+// 这里把JS用到的所有语言都赋值到这里
+var process_request = "正在处理您的请求...";
+var todolist_caption = "记事本";
+var todolist_autosave = "自动保存";
+var todolist_save = "保存";
+var todolist_clear = "清除";
+var todolist_confirm_save = "是否将更改保存到记事本？";
+var todolist_confirm_clear = "是否清空内容？";
+//-->
+</script>
+
+<style type="text/css">
+.mydesket .title {
+	height: 30px;
+	position: relative;
+}
+.mydesket .title .weight {
+	position: absolute;
+	top: 0px;
+	left: 100px;
+	line-height: 35px;
+	color: #F00;
+	font-size: 14px;
+}
+.form-div .sx .brand li {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+.form-div .sx .brand {
+	margin: 0px;
+	padding: 0px;
+}
+.mydesket .title .address {
+	position: absolute;
+	left: 200px;
+	top: 0px;
+	line-height: 30px;
+}
+.mydesket  #psAddress {
+	height: 20px;
+}
+.form-div .sx {
+	clear: both;
+}
+#listdiv .goods_list_taocan {
+	margin: 0px;
+	padding: 0px;
+}
+.form-div .sx .brand li {
+	padding: 5px;
+	float: left;
+	width: 100px;
+}
+.sx .brand li span {
+	clear: both;
+	display: block;
+	line-height: 25px;
+}
+goods_list_taocan li a {
+	display: block;
+}
+.goods_list_taocan li .pic {
+	padding: 2px;
+	height: 122px;
+	width: 122px;
+	border: 1px solid #CCC;
+}
+.goods_list_taocan li .title {
+	color: #333;
+	text-decoration: none;
+	line-height: 25px;
+}
+.goods_list_taocan li .info .price {
+	color: #F00;
+	width: 50px;
+	display: block;
+	float: left;
+}
+.goods_list_taocan li .info .kc {
+	display: block;
+	color: #999;
+	float: right;
+	width: 60px;
+	text-align: right;
+}
+.goods_list_taocan li .info {
+	height: 20px;
+}
+.goods_list_taocan li {
+	display: block;
+	float: left;
+	height: 173px;
+	width: 125px;
+	padding: 5px;
+	overflow: hidden; 
+	position:relative;
+
+}
+#listdiv {
+	float: left;
+	width: 810px;
+	border: 1px solid #CCC;
+}
+
+#listdiv .select {
+	background: url("trans.gif") repeat scroll 0 0 transparent;
+	height: 180px;
+	left: 0;
+	padding: 180px 5px 5px;
+	position: absolute;
+	top: 0;
+	width: 132px;
+}
+#listdiv .select b {
+	background: none repeat scroll 0 0 #000000;
+	display: block;
+	height: 180px;
+	left: 5;
+	opacity: 0.4;
+	position: absolute;
+	top: 180px;
+	width: 132px;
+	z-index: 1;
+}
+#listdiv .select span {
+  position: relative;
+  z-index: 500;
+}
+.myclz ul li {
+  background-color: #CBF5D1;
+  display: block;
+  float: left;
+  height: 40px;
+  margin: 0 5px 5px;
+  padding: 5px;
+  position: relative;
+  width: 150px;
+}
+.myclz ul li span {
+	height: 20px;
+	
+}
+.myclz ul li .num {
+	color: #999;
+	font-size: 12px;
+	line-height: 20px;
+}
+.myclz ul li .del {
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	height: 20px;
+	width: 20px;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	color: #F00;
+	cursor: pointer;
+}
+#listdiv  .select span dl dt {
+	background-color: #CCC;
+	height: 20px;
+	width: 50px;
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+#listdiv  .select span dl .zdy {
+	width: 105px;
+}
+#listdiv  .select span dl  {
+	padding: 8px;	
+}
+#listdiv  .select span dl  a{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #F00;
+	text-decoration: none;	
+}
+.myclz ul li a {
+  display: block;
+  height: 20px;
+}#mycl {
+	padding: 5px;
+}
+</style>
+</head>
+<body>
+
+<h1>
+<span class="action-span1"><a href="index.php?act=main">ECSHOP 管理中心</a> </span><span id="search_id" class="action-span1"></span>
+<div style="clear:both"></div>
+</h1>
+<script type="text/javascript" src="../js/utils.js"></script><script type="text/javascript" src="js/listtable.js"></script><script type="text/javascript" src="../taocan.js"></script>
+
+<script type="text/javascript">
+<!--
+var process_request = "";
+function getlist(key)
+{
+	listTable.query='gettaocan';
+	  listTable.filter['brand_id'] = key;
+	  listTable.filter['ps_id'] = "43";
+	  listTable.filter['tid'] = "110";
+	  listTable.loadList();
+
+}	
+function addshop(id,num)
+{
+	listTable.query='addshop';
+	  listTable.filter['goods_id'] = id;
+	  listTable.filter['num'] = num;
+	  listTable.filter['ps_id'] = "43";
+	  listTable.filter['tid'] = "110";
+	  listTable.addshop();
+	
+	}
+$(document).ready(function(){
+$('#listdiv .select').mouseover(function(){
+$(this).stop().animate({"top":"-180px"}, 200);
+})
+$('#listdiv .select').mouseout(function(){
+$(this).stop().animate({"top":"0"}, 200);
+})
+})
+	-->
+</script>
+<!-- 订单搜索 -->
+<div class="form-div">
+   <div class="mydesket">
+     <div class="title">
+       <h1>我的菜篮子</h1><span class="weight">共：3斤</span> <span class="address">配送地点：<select name="psAddress" id="psAddress" onchange="changeAddress(this)">
+      <option value="-1">选择配送地点</option>
+      {foreach from=$shipping_area item=area}
+      <option value="{$area.shipping_area_id}" {if $area.shipping_area_id==$order_taocan.peisong_area_id}selected="selected"{/if}>{$area.shipping_area_name}</option>
+      {/foreach}
+    </select></span>
+     </div>
+   </div>
+   <div class="myclz" id="mycl"> 
+    <ul>
+            你的菜篮里还没有菜，快去挑选吧
+     </ul>
+   
+   
+</div>
+
+</div>
+<div class="form-div">
+    <h1><span>可选商品</span></h1>
+  <div class="sx">
+    <ul class="brand">
+        <li onclick=""><img src="/data/brandlogo/1367338020545631229.jpg" width="100" height="100"  onclick="getlist(21);"/><span>李剑锋</span></li>
+      </ul>
+    </div>
+   <div class="clear"></div>
+<div class="goods_list" id="listdiv">
+      <ul class="goods_list_taocan" >
+                <li>
+          <a class="pic" href="#"><img width="120" height="120" alt="" src="/images/201211/thumb_img/96_thumb_G_1353871276960.jpg" /></a>
+          <a class="title" href="">"李家"白萝卜</a>
+          <div class="info"><span class="price">8.00</span><span class="kc">30斤</span></div>
+          <div class="select">
+		<b></b>
+		<span>
+	<dl>
+        <dt><a href="#" onclick="addshop(96,1);">0.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(96,2);">1斤</a></dt>
+        <dt><a href="#" onclick="addshop(96,3);">1.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(96,4);">2斤</a></dt>
+        <dt><a href="#" onclick="addshop(96,5);">2.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(96,6);">3斤</a></dt>
+        <dt><a href="#" onclick="addshop(96,8);">4斤</a></dt>
+        <dt><a href="#" onclick="addshop(96,10);">5斤</a></dt>
+        <dt class="zdy">自定义<input type="text" size="6" /></dt>
+        </dl>
+		</span>
+	</div>
+        </li>
+                <li>
+          <a class="pic" href="#"><img width="120" height="120" alt="" src="/images/201302/thumb_img/121_thumb_G_1359759608628.jpg" /></a>
+          <a class="title" href="">"李家"娃娃菜</a>
+          <div class="info"><span class="price">8.00</span><span class="kc">20斤</span></div>
+          <div class="select">
+		<b></b>
+		<span>
+	<dl>
+        <dt><a href="#" onclick="addshop(121,1);">0.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(121,2);">1斤</a></dt>
+        <dt><a href="#" onclick="addshop(121,3);">1.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(121,4);">2斤</a></dt>
+        <dt><a href="#" onclick="addshop(121,5);">2.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(121,6);">3斤</a></dt>
+        <dt><a href="#" onclick="addshop(121,8);">4斤</a></dt>
+        <dt><a href="#" onclick="addshop(121,10);">5斤</a></dt>
+        <dt class="zdy">自定义<input type="text" size="6" /></dt>
+        </dl>
+		</span>
+	</div>
+        </li>
+                <li>
+          <a class="pic" href="#"><img width="120" height="120" alt="" src="/images/201304/thumb_img/129_thumb_G_1365219472327.jpg" /></a>
+          <a class="title" href="">"李家"结球生菜</a>
+          <div class="info"><span class="price">8.00</span><span class="kc">20斤</span></div>
+          <div class="select">
+		<b></b>
+		<span>
+	<dl>
+        <dt><a href="#" onclick="addshop(129,1);">0.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(129,2);">1斤</a></dt>
+        <dt><a href="#" onclick="addshop(129,3);">1.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(129,4);">2斤</a></dt>
+        <dt><a href="#" onclick="addshop(129,5);">2.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(129,6);">3斤</a></dt>
+        <dt><a href="#" onclick="addshop(129,8);">4斤</a></dt>
+        <dt><a href="#" onclick="addshop(129,10);">5斤</a></dt>
+        <dt class="zdy">自定义<input type="text" size="6" /></dt>
+        </dl>
+		</span>
+	</div>
+        </li>
+                <li>
+          <a class="pic" href="#"><img width="120" height="120" alt="" src="/images/201301/thumb_img/97_thumb_G_1358548021242.jpg" /></a>
+          <a class="title" href="">"李家"豌豆苗</a>
+          <div class="info"><span class="price">8.00</span><span class="kc">9斤</span></div>
+          <div class="select">
+		<b></b>
+		<span>
+	<dl>
+        <dt><a href="#" onclick="addshop(97,1);">0.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(97,2);">1斤</a></dt>
+        <dt><a href="#" onclick="addshop(97,3);">1.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(97,4);">2斤</a></dt>
+        <dt><a href="#" onclick="addshop(97,5);">2.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(97,6);">3斤</a></dt>
+        <dt><a href="#" onclick="addshop(97,8);">4斤</a></dt>
+        <dt><a href="#" onclick="addshop(97,10);">5斤</a></dt>
+        <dt class="zdy">自定义<input type="text" size="6" /></dt>
+        </dl>
+		</span>
+	</div>
+        </li>
+                <li>
+          <a class="pic" href="#"><img width="120" height="120" alt="" src="/images/201211/thumb_img/106_thumb_G_1353871147969.jpg" /></a>
+          <a class="title" href="">"李家"香菜</a>
+          <div class="info"><span class="price">4.00</span><span class="kc">6斤</span></div>
+          <div class="select">
+		<b></b>
+		<span>
+	<dl>
+        <dt><a href="#" onclick="addshop(106,1);">0.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(106,2);">1斤</a></dt>
+        <dt><a href="#" onclick="addshop(106,3);">1.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(106,4);">2斤</a></dt>
+        <dt><a href="#" onclick="addshop(106,5);">2.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(106,6);">3斤</a></dt>
+        <dt><a href="#" onclick="addshop(106,8);">4斤</a></dt>
+        <dt><a href="#" onclick="addshop(106,10);">5斤</a></dt>
+        <dt class="zdy">自定义<input type="text" size="6" /></dt>
+        </dl>
+		</span>
+	</div>
+        </li>
+                <li>
+          <a class="pic" href="#"><img width="120" height="120" alt="" src="/images/201302/thumb_img/107_thumb_G_1360878234836.jpg" /></a>
+          <a class="title" href="">"李家"意大利苦苣</a>
+          <div class="info"><span class="price">8.00</span><span class="kc">10斤</span></div>
+          <div class="select">
+		<b></b>
+		<span>
+	<dl>
+        <dt><a href="#" onclick="addshop(107,1);">0.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(107,2);">1斤</a></dt>
+        <dt><a href="#" onclick="addshop(107,3);">1.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(107,4);">2斤</a></dt>
+        <dt><a href="#" onclick="addshop(107,5);">2.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(107,6);">3斤</a></dt>
+        <dt><a href="#" onclick="addshop(107,8);">4斤</a></dt>
+        <dt><a href="#" onclick="addshop(107,10);">5斤</a></dt>
+        <dt class="zdy">自定义<input type="text" size="6" /></dt>
+        </dl>
+		</span>
+	</div>
+        </li>
+                <li>
+          <a class="pic" href="#"><img width="120" height="120" alt="" src="/images/201304/thumb_img/151_thumb_G_1366482581708.jpg" /></a>
+          <a class="title" href="">"李家"韭菜</a>
+          <div class="info"><span class="price">8.00</span><span class="kc">10斤</span></div>
+          <div class="select">
+		<b></b>
+		<span>
+	<dl>
+        <dt><a href="#" onclick="addshop(151,1);">0.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(151,2);">1斤</a></dt>
+        <dt><a href="#" onclick="addshop(151,3);">1.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(151,4);">2斤</a></dt>
+        <dt><a href="#" onclick="addshop(151,5);">2.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(151,6);">3斤</a></dt>
+        <dt><a href="#" onclick="addshop(151,8);">4斤</a></dt>
+        <dt><a href="#" onclick="addshop(151,10);">5斤</a></dt>
+        <dt class="zdy">自定义<input type="text" size="6" /></dt>
+        </dl>
+		</span>
+	</div>
+        </li>
+                <li>
+          <a class="pic" href="#"><img width="120" height="120" alt="" src="/images/201303/thumb_img/137_thumb_G_1362372802287.jpg" /></a>
+          <a class="title" href="">"李家"牛心包菜</a>
+          <div class="info"><span class="price">8.00</span><span class="kc">10斤</span></div>
+          <div class="select">
+		<b></b>
+		<span>
+	<dl>
+        <dt><a href="#" onclick="addshop(137,1);">0.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(137,2);">1斤</a></dt>
+        <dt><a href="#" onclick="addshop(137,3);">1.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(137,4);">2斤</a></dt>
+        <dt><a href="#" onclick="addshop(137,5);">2.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(137,6);">3斤</a></dt>
+        <dt><a href="#" onclick="addshop(137,8);">4斤</a></dt>
+        <dt><a href="#" onclick="addshop(137,10);">5斤</a></dt>
+        <dt class="zdy">自定义<input type="text" size="6" /></dt>
+        </dl>
+		</span>
+	</div>
+        </li>
+                <li>
+          <a class="pic" href="#"><img width="120" height="120" alt="" src="/images/201303/thumb_img/139_thumb_G_1362785209913.jpg" /></a>
+          <a class="title" href="">"李家"娃娃菜薹</a>
+          <div class="info"><span class="price">8.00</span><span class="kc">10斤</span></div>
+          <div class="select">
+		<b></b>
+		<span>
+	<dl>
+        <dt><a href="#" onclick="addshop(139,1);">0.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(139,2);">1斤</a></dt>
+        <dt><a href="#" onclick="addshop(139,3);">1.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(139,4);">2斤</a></dt>
+        <dt><a href="#" onclick="addshop(139,5);">2.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(139,6);">3斤</a></dt>
+        <dt><a href="#" onclick="addshop(139,8);">4斤</a></dt>
+        <dt><a href="#" onclick="addshop(139,10);">5斤</a></dt>
+        <dt class="zdy">自定义<input type="text" size="6" /></dt>
+        </dl>
+		</span>
+	</div>
+        </li>
+                <li>
+          <a class="pic" href="#"><img width="120" height="120" alt="" src="/images/201304/thumb_img/149_thumb_G_1366480248955.jpg" /></a>
+          <a class="title" href="">"李家"巴西苦苣</a>
+          <div class="info"><span class="price">8.00</span><span class="kc">10斤</span></div>
+          <div class="select">
+		<b></b>
+		<span>
+	<dl>
+        <dt><a href="#" onclick="addshop(149,1);">0.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(149,2);">1斤</a></dt>
+        <dt><a href="#" onclick="addshop(149,3);">1.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(149,4);">2斤</a></dt>
+        <dt><a href="#" onclick="addshop(149,5);">2.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(149,6);">3斤</a></dt>
+        <dt><a href="#" onclick="addshop(149,8);">4斤</a></dt>
+        <dt><a href="#" onclick="addshop(149,10);">5斤</a></dt>
+        <dt class="zdy">自定义<input type="text" size="6" /></dt>
+        </dl>
+		</span>
+	</div>
+        </li>
+                <li>
+          <a class="pic" href="#"><img width="120" height="120" alt="" src="/images/201211/thumb_img/91_thumb_G_1353871325655.jpg" /></a>
+          <a class="title" href="">"李家"花菜</a>
+          <div class="info"><span class="price">8.00</span><span class="kc">1斤</span></div>
+          <div class="select">
+		<b></b>
+		<span>
+	<dl>
+        <dt><a href="#" onclick="addshop(91,1);">0.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(91,2);">1斤</a></dt>
+        <dt><a href="#" onclick="addshop(91,3);">1.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(91,4);">2斤</a></dt>
+        <dt><a href="#" onclick="addshop(91,5);">2.5斤</a></dt>
+        <dt><a href="#" onclick="addshop(91,6);">3斤</a></dt>
+        <dt><a href="#" onclick="addshop(91,8);">4斤</a></dt>
+        <dt><a href="#" onclick="addshop(91,10);">5斤</a></dt>
+        <dt class="zdy">自定义<input type="text" size="6" /></dt>
+        </dl>
+		</span>
+	</div>
+        </li>
+                <div class="blank"></div>
+      </ul>
+  </div>
+</div>
+<div id="footer">
+<br />
+版权所有 &copy; 2005-2012 上海商派网络科技有限公司，并保留所有权利。</div>
+<!-- 新订单提示信息 -->
+<div id="popMsg">
+  <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#cfdef4" border="0">
+  <tr>
+    <td style="color: #0f2c8c" width="30" height="24"></td>
+    <td style="font-weight: normal; color: #1f336b; padding-top: 4px;padding-left: 4px" valign="center" width="100%"> 新订单通知</td>
+    <td style="padding-top: 2px;padding-right:2px" valign="center" align="right" width="19"><span title="关闭" style="cursor: hand;cursor:pointer;color:red;font-size:12px;font-weight:bold;margin-right:4px;" onclick="Message.close()" >×</span><!-- <img title=关闭 style="cursor: hand" onclick=closediv() hspace=3 src="msgclose.jpg"> --></td>
+  </tr>
+  <tr>
+    <td style="padding-right: 1px; padding-bottom: 1px" colspan="3" height="70">
+    <div id="popMsgContent">
+      <p>您有 <strong style="color:#ff0000" id="spanNewOrder">1</strong> 个新订单以及       <strong style="color:#ff0000" id="spanNewPaid">0</strong> 个新付款的订单</p>
+      <p align="center" style="word-break:break-all"><a href="order.php?act=list"><span style="color:#ff0000">点击查看新订单</span></a></p>
+    </div>
+    </td>
+  </tr>
+  </table>
+</div>
+
+<!--
+<embed src="images/online.wav" width="0" height="0" autostart="false" name="msgBeep" id="msgBeep" enablejavascript="true"/>
+-->
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash2/cabs/swflash.cab#version=4,0,0,0" id="msgBeep" width="1" height="1">
+  <param name="movie" value="images/online.swf">
+  <param name="quality" value="high">
+  <embed src="images/online.swf" name="msgBeep" id="msgBeep" quality="high" width="0" height="0" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?p1_prod_version=shockwaveflash">
+  </embed>
+</object>
+
+<script language="JavaScript">
+document.onmousemove=function(e)
+{
+  var obj = Utils.srcElement(e);
+  if (typeof(obj.onclick) == 'function' && obj.onclick.toString().indexOf('listTable.edit') != -1)
+  {
+    obj.title = '点击修改内容';
+    obj.style.cssText = 'background: #278296;';
+    obj.onmouseout = function(e)
+    {
+      this.style.cssText = '';
+    }
+  }
+  else if (typeof(obj.href) != 'undefined' && obj.href.indexOf('listTable.sort') != -1)
+  {
+    obj.title = '点击对列表排序';
+  }
+}
+<!--
+
+
+var MyTodolist;
+function showTodoList(adminid)
+{
+  if(!MyTodolist)
+  {
+    var global = $import("../js/global.js","js");
+    global.onload = global.onreadystatechange= function()
+    {
+      if(this.readyState && this.readyState=="loading")return;
+      var md5 = $import("js/md5.js","js");
+      md5.onload = md5.onreadystatechange= function()
+      {
+        if(this.readyState && this.readyState=="loading")return;
+        var todolist = $import("js/todolist.js","js");
+        todolist.onload = todolist.onreadystatechange = function()
+        {
+          if(this.readyState && this.readyState=="loading")return;
+          MyTodolist = new Todolist();
+          MyTodolist.show();
+        }
+      }
+    }
+  }
+  else
+  {
+    if(MyTodolist.visibility)
+    {
+      MyTodolist.hide();
+    }
+    else
+    {
+      MyTodolist.show();
+    }
+  }
+}
+
+if (Browser.isIE)
+{
+  onscroll = function()
+  {
+    //document.getElementById('calculator').style.top = document.body.scrollTop;
+    document.getElementById('popMsg').style.top = (document.body.scrollTop + document.body.clientHeight - document.getElementById('popMsg').offsetHeight) + "px";
+  }
+}
+
+if (document.getElementById("listDiv"))
+{
+  document.getElementById("listDiv").onmouseover = function(e)
+  {
+    obj = Utils.srcElement(e);
+
+    if (obj)
+    {
+      if (obj.parentNode.tagName.toLowerCase() == "tr") row = obj.parentNode;
+      else if (obj.parentNode.parentNode.tagName.toLowerCase() == "tr") row = obj.parentNode.parentNode;
+      else return;
+
+      for (i = 0; i < row.cells.length; i++)
+      {
+        if (row.cells[i].tagName != "TH") row.cells[i].style.backgroundColor = '#F4FAFB';
+      }
+    }
+
+  }
+
+  document.getElementById("listDiv").onmouseout = function(e)
+  {
+    obj = Utils.srcElement(e);
+
+    if (obj)
+    {
+      if (obj.parentNode.tagName.toLowerCase() == "tr") row = obj.parentNode;
+      else if (obj.parentNode.parentNode.tagName.toLowerCase() == "tr") row = obj.parentNode.parentNode;
+      else return;
+
+      for (i = 0; i < row.cells.length; i++)
+      {
+          if (row.cells[i].tagName != "TH") row.cells[i].style.backgroundColor = '#FFF';
+      }
+    }
+  }
+
+  document.getElementById("listDiv").onclick = function(e)
+  {
+    var obj = Utils.srcElement(e);
+
+    if (obj.tagName == "INPUT" && obj.type == "checkbox")
+    {
+      if (!document.forms['listForm'])
+      {
+        return;
+      }
+      var nodes = document.forms['listForm'].elements;
+      var checked = false;
+
+      for (i = 0; i < nodes.length; i++)
+      {
+        if (nodes[i].checked)
+        {
+           checked = true;
+           break;
+         }
+      }
+
+      if(document.getElementById("btnSubmit"))
+      {
+        document.getElementById("btnSubmit").disabled = !checked;
+      }
+      for (i = 1; i <= 10; i++)
+      {
+        if (document.getElementById("btnSubmit" + i))
+        {
+          document.getElementById("btnSubmit" + i).disabled = !checked;
+        }
+      }
+    }
+  }
+
+}
+
+//-->
+</script>
+</body>
+</html>

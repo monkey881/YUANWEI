@@ -1,0 +1,357 @@
+﻿<?php
+if(!function_exists("index_get_links")){
+function index_get_links()
+{
+    $sql = 'SELECT link_logo, link_name, link_url FROM ' . $GLOBALS['ecs']->table('friend_link') . ' ORDER BY show_order';
+    $res = $GLOBALS['db']->getAll($sql);
+    $links['img'] = $links['txt'] = array();
+    foreach ($res AS $row)
+    {
+        if (!empty($row['link_logo']))
+        {
+            $links['img'][] = array('name' => $row['link_name'],
+                                    'url' => $row['link_url'],
+                                    'logo' => $row['link_logo']);
+        }
+        else
+        {
+            $links['txt'][] = array('name' => $row['link_name'],
+                                    'url' => $row['link_url']);
+        }
+    }
+    return $links;
+}
+
+    $links = index_get_links();
+    $this->assign('img_links',       $links['img']);
+    $this->assign('txt_links',       $links['txt']);
+}
+?><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+
+  
+<script type="text/javascript">
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+</script>
+
+<div class="head">
+  <span style="font-weight:bold;font-size:14px">欢迎光临原味生活幸福超市！</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  {insert name='member_info'} 
+ 
+   
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    【<a href="../user.php?act=message_list"><span class="top-line">在线留言</span></a>】
+    
+   
+ <!-- QQ 号码 {foreach from=$qq item=im} -->
+      <!-- {if $im} -->
+      【QQ客服 <a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$im}&amp;Site={$shop_name}&amp;Menu=yes" target="_blank"><img src="http://wpa.qq.com/pa?p=1:{$im}:4" height="16" border="0" alt="QQ" /> <span class="top-line">{$im}</span></a>】
+      <!-- {/if} -->   <!-- {/foreach} 结束QQ号码 -->
+      <a href="http://weibo.com/yw0511"><img src="../images/新浪微博.jpg" alt="微博" width="85" height="19" style=" vertical-align:text-bottom;" ></a>
+      
+      
+      </div>
+</div>    
+    
+<script language="javascript"> 
+<!--
+function killerrors() { 
+return true; 
+} 
+window.onerror = killerrors; 
+//-->
+</script>
+{insert_scripts files='transport.js,utils.js'}
+<script src="./js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">var $$=jQuery.noConflict();</script>
+
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+
+</script>
+<style type="text/css">
+.top-line:hover{
+    color:red;
+}
+.head{
+    height:30px;
+    text-align:center;
+    background-image:url(../images/head.jpg);
+    padding-top:4px;
+    
+    
+}
+ .autosuggest{
+     position:relative;
+ }
+ #suggestions{
+     text-align:center;
+     top:30px;
+     left:57px;
+     position:absolute;
+     list-style:none;
+     margin:0;
+     padding:0;
+     width:125px;
+     display:none;
+     background-color:#FFBF85;
+     z-index:10000;
+ }
+ #suggestions li{
+     line-height:20px;
+     height:20px;
+     cursor:pointer;
+     border-right:1px solid #FE7F01;
+     border-bottom:1px solid #FE7F01;
+     border-left:1px solid #FE7F01;
+
+ }
+ .active{
+     background-color:#FD7F02;
+     color:#fff;
+ }
+ #error{
+     font-weight:bold;
+     color:#ff0000;
+ }
+ #loader{
+     position:absolute;
+     top:11px;
+     right:55px;
+     display:none;
+ }
+ 
+
+
+</style>
+
+  <style type="text/css">
+<!--
+.keisai-text { font-size: 12px;
+margin-bottom: 3px;
+color: #333333;
+border-bottom: dashed 1px;
+padding-bottom:2px;
+}
+.special { font-size: 12px;
+margin:3px 0px 3px 0px;
+padding:2px;
+border: double #d4aa03;
+background: #feefb3;
+margin-bottom:7px;
+}
+.a_hover:hover{
+    color:#D15A02;
+}
+.hotsearch:hover{
+    color:#000;
+}
+.s_btn{
+    color:#fff;
+    cursor:pointer;
+}
+.s_btn:hover{
+    color:#000;
+    border-color:#D15A02;
+}
+-->
+.top_navi{
+    margin:0 auto;
+    width:990px;
+}
+.top_left{
+    float:left;
+    display:inline;
+}
+.top_middle{
+    text-align:center;
+    margin:0 20px;
+    float:left;
+    display:inline;
+}
+.top_right{
+    text-align:right;
+    float:right;
+    display:inline;
+}
+.huanyhuiyuan{
+    font-size:14px;
+    color:#F60;
+    font-weight:bold;
+}
+.huanyhuiyuan:hover{
+    color:#093;
+    font-weight: bold;
+}
+</style>
+<div class="top_navi">
+    <div class="top_left">
+        <a href="../index.php"><img src="../images/logo.jpg" width="230" height="86" alt="原味生活"></a>
+    </div>
+  <div style="float:left;">
+    <h2>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+        <span style="font-size: 20px; color: #000; font-family: '华文楷体'; font-weight:bold;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原味生活是一个镇江市内&quot;连婴儿和妈妈都可以吃得放心&quot;的幸福超市</span>
+</h2>
+</div>
+
+    <div style="clear:both;"></div>
+</div>
+
+<div class="search_div">
+  <div class="block" style="height:38px; line-height:38px; background:#FFBF85; width:990px;">
+<div id="search"  class="clearfix" style="float:left; margin-left:26px; display:inline;">
+    <div class="autosuggest">
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" style="_position:relative; top:5px;">
+   <select name="search_type" class="search_type">
+        <option {if $display_type neq '0' or $display_type neq '1'} selected {/if}>商品</option>
+        <option {if $display_type eq '0'} selected {/if}>农户</option>
+        <option {if $display_type eq '1'} selected {/if}>菜谱</option>
+    </select>
+ <input name="keywords" type="text" class="keypaz" id="keyword" value="{$search_keywords|escape}"/>  
+<ul id="suggestions">
+  
+</ul>
+<img src="../images/loading.gif" alt="loading" title="loading"  id="loader"/>
+<span id="error"></span>
+   <input name="imageField" type="submit" value="搜索" class="s_btn"/>
+   </form>
+   </div>
+</div>
+<div class="hotword">
+   <script type="text/javascript">
+   
+   
+     $$(document).ready(function(){
+        
+  var xhr;
+    $$('#keyword').keydown(navigateList);
+  $$('#keyword').keyup(getSuggestions);
+
+  $$('#suggestions>li').live('mouseover mouseout click',listHover);
+  
+  
+  function getSuggestions(event){
+      $$('#error').hide();
+     var value=jQuery.trim($$(this).val());
+     var type = $$('.search_type').val();
+     if(value==''||event.which==27){
+      $$('#suggestions').empty().hide();
+      $$('#loader').hide();
+    }
+    if((event.which>=65 && event.which<=90)||(event.which>=48&&event.which<=57)||(event.which>=96&&event.which<=105)||event.which==8 ||event.which==46||event.which==32 ){
+      $$('#loader').show();
+      if(xhr) xhr.abort();
+      if(value.length>=1){
+         xhr=$$.get("suggestions.php",{input:value,type:type},showSuggestions,"text");
+        }else{
+          $$('#loader').hide();
+        }
+    }
+ }
+ 
+ function showSuggestions(data){
+     if(data==''){
+     $$('#error').html('未检索到数据').show();
+     $$('#suggestions').empty().hide();
+   }else{
+     $$('#suggestions').html(data).show();
+   }
+   $$('#loader').hide();
+             
+       }
+ function navigateList(event){
+  switch(event.which){
+  case 38://up arrow
+  if($$('#suggestions>li.active').length>0){
+    $$('#suggestions>li.active').removeClass('active').prev().addClass('active');
+  }else{
+    $$('#suggestions>li:last').addClass('active');
+  }
+  break;
+  
+  case 40://down arrow
+  if($$('#suggestions>li.active').length>0){
+    $$('#suggestions>li.active').removeClass('active').next().addClass('active');
+  }else{
+    $$('#suggestions>li:first').addClass('active');
+  }
+  break;
+  
+  case 13://enter
+  $$('#keyword').val($$('#suggestions>li.active').text());
+  $$('#suggestions').empty().hide();
+  break;
+  }
+ }
+ function listHover(event){
+   if(event.type=='mouseover'){
+     $$('#suggestions>li.active').removeClass('active');
+   }
+   $$(this).toggleClass('active');
+   if(event.type=='click'){
+     $$('#keyword').val($$(this).html());
+     searchForm.submit();
+     $$(this).parent().empty().hide();
+     $$('#keyword').focus();
+   }
+   
+ }
+ 
+ 
+  
+ });
+   
+   
+
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+
+    </script>
+    {if $searchkeywords}
+    <span style="color:#F00">热门搜索：</span>
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}"  class="hotsearch">{$val}</a>
+   {/foreach}
+   {/if}
+   
+</div>
+  </div>
+</div>
