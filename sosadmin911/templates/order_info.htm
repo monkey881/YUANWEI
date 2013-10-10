@@ -274,7 +274,11 @@
   <tr>
     <td><div align="right"></div>
       <div align="right"><strong>{$lang.label_operable_act}</strong> </div></td>
-    <td colspan="5">{if $operable_list.confirm}
+    <td colspan="5"><!-- 一键发货begin -->   
+    {if $order.pay_status eq 2 and $order.shipping_status neq 1 and $order.order_status eq 1 }   
+<input name="invoice_no" type="text" style="color:#00F" value="{$order.order_sn}" /><input name="to_shipping" type="submit" style="color:#F00" value="快速发货" class="button"/>{/if}
+<!-- 一键发货end--> 
+    {if $operable_list.confirm}
       <input name="confirm" type="submit" value="{$lang.op_confirm}" class="button" />
         {/if} {if $operable_list.pay}
         <input name="pay" type="submit" value="{$lang.op_pay}" class="button" />

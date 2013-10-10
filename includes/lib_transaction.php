@@ -263,14 +263,14 @@ function get_goods_taocan_list($goods_taocan_id,$num=36,$start=0,$brand_id=0)
     $taocan_list = array();
     while ($row = $GLOBALS['db']->fetchRow($res))
     {
-		//if($row['num']>0)
-//		{
-//		$row['weigth']=$row['goods_weight']*$row['num']*2;
-//		}
-//		else
-//		{
+		if($row['num']>0)
+		{
+		$row['weigth']=$row['goods_weight']*$row['num']*2;
+		}
+		else
+		{
 			$row['weigth']=$row['goods_weight']*$row['goods_number']*2;
-		//	}
+			}
 			$row['goods_weight1']=$row['goods_weight']*2;
 			$row['goods_weight2']=$row['goods_weight']*2*2;
 			$row['goods_weight3']=$row['goods_weight']*2*3;
@@ -386,9 +386,9 @@ function get_user_orders($user_id, $num = 10, $start = 0,$status='')
 
     while ($row = $GLOBALS['db']->fetchRow($res))
     {
-		if($row['is_comment']==0){
-			$comment="<a  href=\"goods.php?id=" .$row['goods_id']. '#ECS_COMMENT" target="_blank"><span style="color:red">评价</span></a>';
-		}
+		/*if($row['is_comment']==0){
+			$comment="<a  href=\"goods.php?id=" .$row['goods_id']. '#3c" target="_blank"><span style="color:red">评价</span></a>';
+		}*/
         if ($row['order_status'] == OS_UNCONFIRMED)
         {
             $row['handler'] = "<a href=\"user.php?act=cancel_order&order_id=" .$row['order_id']. "\" onclick=\"if (!confirm('".$GLOBALS['_LANG']['confirm_cancel']."')) return false;\">".$GLOBALS['_LANG']['cancel']."</a>";
@@ -445,7 +445,7 @@ function get_user_orders_taocan($user_id=0, $num = 10, $start = 0)
     $arr    = array();
 	$wheresql="";
 	if($user_id){
-		$wheresql=" WHERE user_id = '$user_id' AND status > 1 AND status<4  ";
+		$wheresql=" WHERE user_id = '$user_id' AND status > 1";
 		}
     $sql = "SELECT * ".
            " FROM " .$GLOBALS['ecs']->table('order_taocan') .
@@ -486,9 +486,9 @@ function get_order_taocan($tid)
 {
     /* 取得订单列表 */
    
-    $sql = "SELECT * ".
-           " FROM " .$GLOBALS['ecs']->table('order_taocan') .
-           " WHERE tid=$tid";
+    $sql = "SELECT ot.*,oi.consignee,oi.address,oi.tel,oi.shipping_id".
+           " FROM " .$GLOBALS['ecs']->table('order_taocan') ." AS ot".
+           " LEFT JOIN ".$GLOBALS['ecs']->table('order_info') ." AS oi ON ot.order_id=oi.order_id WHERE ot.tid=$tid";
     $res = $GLOBALS['db']->getRow($sql);
 	if($res)
 	{
@@ -508,10 +508,11 @@ function get_order_taocan($tid)
 					   $res['taocan_weight']   = $res['taocan_weight']*2 .'斤';
 					   $res['song_weight']   = $res['song_weight']*2 .'斤';
 					   $res['zengsong']   = $res['zengsong']*2 .'斤';
-					    $res['ps_weight']   = $res['ps_weight']*2 ;
+					   $res['ps_weight']   = $res['ps_weight']*2 ;
 					   $res['handler']   = $res['handler'];
 					   $res['status']   = getStatus($res['status']);
 					   $res['y_weight']   = ($res['taocan_weight']+$res['zengsong']-$res['song_weight']) .'斤';
+					   $res['shipping_id']   = $res['shipping_id'];
 	}
     
     return $res;

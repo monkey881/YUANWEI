@@ -9,8 +9,8 @@
  * 这不是一个自由软件！您只能在不用于商业目的的前提下对程序代码进行修改和
  * 使用；不允许对程序代码以任何形式任何目的的再发布。
  * ============================================================================
- * $Author: yehuaixiao $
- * $Id: lib_payment.php 17218 2011-01-24 04:10:41Z yehuaixiao $
+ * $Author: chenpeng $
+ * $Id: lib_payment.php 17218 2013-04-19 04:10:41Z chenpeng $
  */
 
 if (!defined('IN_ECS'))
@@ -108,16 +108,10 @@ function get_goods_name_by_id($order_id)
  */
 function check_money($log_id, $money)
 {
-    if(is_numeric($log_id))
-    {
-        $sql = 'SELECT order_amount FROM ' . $GLOBALS['ecs']->table('pay_log') .
+    $sql = 'SELECT order_amount FROM ' . $GLOBALS['ecs']->table('pay_log') .
               " WHERE log_id = '$log_id'";
-        $amount = $GLOBALS['db']->getOne($sql);
-    }
-    else
-    {
-        return false;
-    }
+    $amount = $GLOBALS['db']->getOne($sql);
+
     if ($money == $amount)
     {
         return true;
@@ -153,12 +147,14 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
             $sql = 'UPDATE ' . $GLOBALS['ecs']->table('pay_log') .
                     " SET is_paid = '1' WHERE log_id = '$log_id'";
             $GLOBALS['db']->query($sql);
+            
 
             /* 根据记录类型做相应处理 */
             if ($pay_log['order_type'] == PAY_ORDER)
             {
                 /* 取得订单信息 */
-                $sql = 'SELECT order_id, user_id, order_sn, consignee, address, tel, shipping_id, extension_code, extension_id, goods_amount ' .
+              $sql = 'SELECT order_id, user_id, order_sn, consignee,address,parent_id,tel,'. 
+			         'shipping_id, extension_code, extension_id, goods_amount,mobile ' .
                         'FROM ' . $GLOBALS['ecs']->table('order_info') .
                        " WHERE order_id = '$pay_log[order_id]'";
                 $order    = $GLOBALS['db']->getRow($sql);
@@ -175,21 +171,30 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
                                 " order_amount = 0 ".
                        "WHERE order_id = '$order_id'";
                 $GLOBALS['db']->query($sql);
-
+                //二次开发
+                $time = mktime();
+                $sql = "UPDATE `ecs_taocan` SET `zhuangtai`='1', `paytime`=$time WHERE (`order_id`=$order_id)";
+                $GLOBALS['db']->query($sql);
                 /* 记录订单操作记录 */
                 order_action($order_sn, OS_CONFIRMED, SS_UNSHIPPED, $pay_status, $note, $GLOBALS['_LANG']['buyer']);
 
-                /* 如果需要，发短信 */
-                if ($GLOBALS['_CFG']['sms_order_payed'] == '1' && $GLOBALS['_CFG']['sms_shop_mobile'] != '')
-                {
-                    include_once(ROOT_PATH.'includes/cls_sms.php');
-                    $sms = new sms();
-                    $sms->send($GLOBALS['_CFG']['sms_shop_mobile'],
-                        sprintf($GLOBALS['_LANG']['order_payed_sms'], $order_sn, $order['consignee'], $order['tel']),'', 13,1);
-                }
-
+               if ($order['extension_code'] == 'group_buy' && $order['extension_id'] > 0)
+               {
+				 set_group_rebate($order['extension_id'],$order['parent_id'],$order['user_id'],$order['order_id'],$order['order_sn']);
+				  set_group_stats($order['extension_id']);
+				 $sql = 'SELECT goods_type FROM '. $GLOBALS['ecs']->table('group_activity') . 
+				         " WHERE group_id='$order[extension_id]'";  
+				  $group_buy =  $GLOBALS['db']->getRow($sql);
+				  if (($group_buy['goods_type'] == 1 && !$GLOBALS['_CFG']['make_group_card']) || $group_buy['goods_type'] == 3)
+				  {
+					   $is_send = !$GLOBALS['_CFG']['send_group_sms'];
+				  	   send_group_cards($order_id,$order_sn,$order['user_id'],$order['mobile'],$is_send);
+				  }
+               }
+ 
                 /* 对虚拟商品的支持 */
                 $virtual_goods = get_virtual_goods($order_id);
+				$virtual_goods = '';
                 if (!empty($virtual_goods))
                 {
                     $msg = '';

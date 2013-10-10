@@ -10,7 +10,7 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
-
+{insert_scripts files='jquery-1.10.2.min.js,json2.js'}
 </head>
 <body>
 <!-- #BeginLibraryItem "/library/page_header2.lbi" --><!-- #EndLibraryItem -->
@@ -35,13 +35,13 @@
   </div>
   <!--left end-->
   <!--right start-->
-   <iframe src="ecvote.php" width="760" height="800" scrolling="Auto" frameborder="0"></iframe>
+   <iframe src="vote/index.php" width="760" height="500" scrolling="Auto" frameborder="0"></iframe>
      
   </div>
   
   <!--right end-->
 </div>
 <div class="blank"></div>
-
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 </body>
 </html>

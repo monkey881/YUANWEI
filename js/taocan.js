@@ -1,7 +1,4 @@
 /* $Id: listtable.js 14980 2008-10-22 05:01:19Z testyang $ */
-if (typeof Ajax != 'object') {
-    alert('Ajax object doesn\'t exists.');
-}
 
 if (typeof Utils != 'object') {
     alert('Utils object doesn\'t exists.');
@@ -57,25 +54,30 @@ listTable.edit = function (obj, act, id) {
     /* 编辑区失去焦点的处理函数 */
     txt.onblur = function (e) {
         if (Utils.trim(txt.value).length > 0) {
-            res = Ajax.call(listTable.url, "act=" + act + "&val=" + encodeURIComponent(Utils.trim(txt.value)) + "&id=" + id, null, "POST", "JSON", false);
-
+            res = $.ajax({
+                url: listTable.url,
+                data: { act: act, val: Utils.trim(txt.value), id: id },
+                type: 'POST',
+                dataType: 'json',
+                async: false
+            });
             if (res.message) {
                 alert(res.message);
             }
 
             try {
-            document.getElementById('mycl').innerHTML = result.content;
-			
-			getlist(0);
+                document.getElementById('mycl').innerHTML = result.content;
 
-            if (typeof result.filter == "object") {
-                listTable.filter = result.filter;
+                getlist(0);
+
+                if (typeof result.filter == "object") {
+                    listTable.filter = result.filter;
+                }
+
             }
-
-        }
-        catch (e) {
-            alert(e.message);
-        }
+            catch (e) {
+                alert(e.message);
+            }
         }
         else {
             obj.innerHTML = org;
@@ -88,9 +90,13 @@ listTable.edit = function (obj, act, id) {
  */
 listTable.toggle = function (obj, act, id) {
     var val = (obj.src.match(/yes.gif/i)) ? 0 : 1;
-
-    var res = Ajax.call(this.url, "act=" + act + "&val=" + val + "&id=" + id, null, "POST", "JSON", false);
-
+    res = $.ajax({
+        url: this.url,
+        data: { act: act, val: val, id: id },
+        type: 'POST',
+        dataType: 'json',
+        async: false
+    });
     if (res.message) {
         alert(res.message);
     }
@@ -104,25 +110,26 @@ listTable.toggle = function (obj, act, id) {
  * 切换排序方式
  */
 listTable.sort = function (sort_by, sort_order) {
-    var args = "act=" + this.query + "&sort_by=" + sort_by + "&sort_order=";
-
+    var args = { act: +this.query, sort_by: sort_by, sort_order: '' };
     if (this.filter.sort_by == sort_by) {
-        args += this.filter.sort_order == "DESC" ? "ASC" : "DESC";
+        args.sort_order = this.filter.sort_order == "DESC" ? "ASC" : "DESC";
+    } else {
+        args.sort_order = "DESC";
     }
-    else {
-        args += "DESC";
-    }
-
     for (var i in this.filter) {
         if (typeof (this.filter[i]) != "function" &&
           i != "sort_order" && i != "sort_by" && !Utils.isEmpty(this.filter[i])) {
-            args += "&" + i + "=" + this.filter[i];
+            args[i] = this.filter[i];
         }
     }
-
     this.filter['page_size'] = this.getPageSize();
-
-    Ajax.call(this.url, args, this.listCallback, "POST", "JSON");
+    $.ajax({
+        url: this.url,
+        data: args,
+        type: 'POST',
+        dataType: 'json',
+        success: this.listCallback
+    });
 }
 
 /**
@@ -142,15 +149,27 @@ listTable.gotoPage = function (page) {
  * 载入列表
  */
 listTable.loadList = function () {
-    var args = "act=" + this.query + "" + this.compileFilter();
-
-    Ajax.call(this.url, args, this.listCallback, "POST", "JSON");
+    var args = { act: this.query };
+    this.compileFilter(args);
+    $.ajax({
+        url: this.url,
+        data: args,
+        type: 'POST',
+        dataType: 'json',
+        success: this.listCallback
+    });
 }
 
 listTable.addshop = function () {
-    var args = "act=" + this.query + "" + this.compileFilter();
-
-    Ajax.call(this.url, args, this.listmycailan, "POST", "JSON");
+    var args = { act: this.query };
+    this.compileFilter(args);
+    $.ajax({
+        url: this.url,
+        data: args,
+        type: 'POST',
+        dataType: 'json',
+        success: this.listmycailan
+    });
 }
 /**
  * 删除列表中的一个记录
@@ -161,18 +180,26 @@ listTable.remove = function (id, cfm, opt) {
     }
 
     if (confirm(cfm)) {
-        var args = "act=" + opt + "&id=" + id;
-
-        Ajax.call(this.url, args, this.listCallback, "GET", "JSON");
+        $.ajax({
+            url: this.url,
+            data: { act: opt + "", id: id },
+            type: 'GET',
+            dataType: 'json',
+            success: this.listCallback
+        });
     }
 }
 
 listTable.delshop = function (id) {
-
-
-    var args = "act=delshop&id=" + id + this.compileFilter();
-
-    Ajax.call(this.url, args, this.listmycailan, "GET", "JSON");
+    var args = { act: 'delshop', id: id };
+    this.compileFilter(args)
+    $.ajax({
+        url: this.url,
+        data: args,
+        type: 'GET',
+        dataType: 'json',
+        success: this.listmycailan
+    });
 
 }
 
@@ -208,9 +235,14 @@ listTable.changePageSize = function (e) {
     };
 }
 listTable.changeAddress = function () {
-    var args = "act=" + this.query + "" + this.compileFilter();
-
-    Ajax.call(this.url, args, "", "POST", "JSON");
+    var args = { act: this.query };
+    this.compileFilter(args)
+    $.ajax({
+        url: this.url,
+        data: args,
+        type: 'POST',
+        dataType: 'json'
+    });
 }
 listTable.listCallback = function (result, txt) {
     if (result.error > 0) {
@@ -269,14 +301,12 @@ listTable.selectAll = function (obj, chk) {
     }
 }
 
-listTable.compileFilter = function () {
-    var args = '';
+listTable.compileFilter = function (args) {
     for (var i in this.filter) {
         if (typeof (this.filter[i]) != "function" && typeof (this.filter[i]) != "undefined") {
-            args += "&" + i + "=" + encodeURIComponent(this.filter[i]);
+            args[i] = this.filter[i];
         }
     }
-
     return args;
 }
 
@@ -328,13 +358,19 @@ listTable.addRow = function (checkFunc) {
                         return false;
                     }
                 }
-                var str = "act=add";
+                var args = { act: 'add' };
                 for (var key in items) {
                     if (typeof (items[key]) != "function") {
-                        str += "&" + key + "=" + items[key].value;
+                        args[key] = items[key].value;
                     }
                 }
-                res = Ajax.call(listTable.url, str, null, "POST", "JSON", false);
+                res = $.ajax({
+                    url: listTable.url,
+                    data: args,
+                    type: 'POST',
+                    dataType: 'json',
+                    async: false
+                });
                 if (res.error) {
                     alert(res.message);
                     table.deleteRow(table.rows.length - 1);

@@ -11,9 +11,9 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
-
+{insert_scripts files='jquery-1.10.2.min.js,json2.js'}
 {* 包含脚本文件 *}
-{insert_scripts files='utils.js,jquery.js,jquery.json-1.3.js,transport2.js,taocan.js'}
+{insert_scripts files='utils.js,common.js,taocan.js'}
 <script type="text/javascript">
 
 var process_request = "{$lang.process_request}";
@@ -105,26 +105,25 @@ function checktaocan()
   <!--right start-->
     <div class="box" style="position:relative">
       <!--#订单列表界面 start-->
-    <div class="blank"></div>
-    <div class="ok"><a href="#" onclick="checktaocan()">确定配送</a></div>
-<div class="address"><font style="color:#000; font-weight:bold;">最小配送重量：<span id="ps_weight">{$order_taocan.ps_weight}</span>斤 &nbsp;&nbsp;配送日期：{$psdate}</font> &nbsp;&nbsp;配送地点：
-  {if $order_taocan.shipping_id==5}
-  <input name="psAddress" type="hidden" value="{$address.address_id}" />
-  {$address.address} 最佳送货时间：{$address.best_time}
-  {else}
-  <select name="psAddress" id="psAddress" onchange="changeAddress(this)"  {if $yips eq '1'} disabled="disabled"{/if} >
-      <option value="-1">选择配送地点</option>
-      {foreach from=$shipping_area item=area}
-      <option value="{$area.shipping_area_id}" {if $area.shipping_area_id==$selectAddress}selected="selected"{/if}>{$area.shipping_area_name}</option>
-      {/foreach}
-    </select>
-    {/if}
-  </div>
+<div class="mx-cl-info">
+<span>最小配送重量：</span><span id="ps_weight">{$order_taocan.ps_weight}</span><span>斤。</span><span>配送日期：</span><span>{$psdate}</span><span>。配送地点：</span>
+{if $order_taocan.shipping_id==5}
+<input name="psAddress" type="hidden" value="{$address.address_id}" />
+<span>{$address.address} 最佳送货时间：{$address.best_time}</span>
+{else}
+<span><select name="psAddress" id="psAddress" onchange="changeAddress(this)"  {if $yips eq '1'} disabled="disabled"{/if}>
+<option value="-1">选择配送地点</option>
+{foreach from=$shipping_area item=area}
+<option value="{$area.shipping_area_id}" {if $area.shipping_area_id==$selectAddress}selected="selected"{/if}>{$area.shipping_area_name}</option>
+{/foreach}
+</select></span>
+{/if}
+</div>
 <div id="mycl">
   {/if}
-  <!-- {if $action eq 'addshop' or $action eq 'delshop' || $action eq 'default' || $action eq 'edit_mygood_num'} -->
+  <!-- {if $action eq 'addshop' or $action eq 'delshop' || $action eq 'default'} -->
 	<div class="mx-box">
-		<div class="mx-bar"><span>我的配送套餐。已选择：</span><span id="z_weight">{$z_weight}</span><span>斤</span></div>
+		<div class="mx-bar"><table class="mx-bar"><tr><td><span>我的套餐。已选择：</span><span id="z_weight" class="mx-num">{$z_weight}</span><span>斤。</span></td><td style="width:600px;"></td><td style="width:150px;text-align:right;"><a class="btn" href="#" onclick="checktaocan()">确定配送</a></td></tr></table></div>
 		<div class="mx-ct">
 		   <div class="myclz"> 
     <ul>

@@ -14,10 +14,10 @@
 */
 
 $_LANG['select_method'] = '选择商品的方式：';
-$_LANG['by_cat'] = '从分类、品牌下选择商品';
-$_LANG['by_sn'] = '分类、品牌下所有商品';
+$_LANG['by_cat'] = '从分类、农民下选择商品';
+$_LANG['by_sn'] = '分类、农民下所有商品';
 $_LANG['select_cat'] = '选择商品分类：';
-$_LANG['select_brand'] = '选择商品品牌：';
+$_LANG['select_brand'] = '选择农民：';
 $_LANG['goods_list'] = '商品列表：';
 $_LANG['src_list'] = '待选列表：';
 $_LANG['dest_list'] = '选定列表：';
@@ -30,7 +30,7 @@ $_LANG['all_same'] = '返现金额';
 $_LANG['go_insert'] = '添加完成';
 $_LANG['goods_class'] = '商品类别';
 $_LANG['goods_name'] = '商品名称';
-$_LANG['brand'] = '品牌';
+$_LANG['brand'] = '农民';
 $_LANG['goods_cat'] = '所属分类：';
 $_LANG['js_languages']['please_select_goods'] = '请您选择商品';
 $_LANG['js_languages']['goods_cat_not_leaf'] = '请选择底级分类';
@@ -42,7 +42,7 @@ $_LANG['ebao_list'] = '易宝推荐列表';
 
 //
 $_LANG['goods_cat'] = '所有分类';
-$_LANG['goods_brand'] = '所有品牌';
+$_LANG['goods_brand'] = '所有农民';
 $_LANG['intro_type'] = '推荐';
 $_LANG['keyword'] = '关键字';
 $_LANG['is_best'] = '精品';

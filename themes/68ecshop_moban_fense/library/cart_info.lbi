@@ -3,21 +3,22 @@
 	font-weight: bold;
 	color: #F00;
 }
-</style>
-{ if $action!='ajax_cart'}
-<script>
-function vv(name){
-if(name=='cat_ul')
-document.getElementById("cat_in").className='cat_ul on';
-else if(name=='cat_ul on')
-document.getElementById("cat_in").className='cat_ul';
-}
-</script>
-<style>
 .cat_ul{background:url(../images/ibuy.png) no-repeat;}
 .cat_ul.on{background:url(../images/ibuy2.png) no-repeat;}
 </style>
-
+<script>
+function vv(name){
+if(name=='cat_ul on')
+document.getElementById("cat_in").className='cat_ul';
+else if(name=='cat_ul')
+document.getElementById("cat_in").className='cat_ul on';
+}
+function Start(){
+setInterval(function(){vv("cat_ul on");}, 3000); //每3秒调用一次方法
+}
+setTimeout(Start, 1000);//延迟5秒开始周期回调
+</script>
+{ if $action!='ajax_cart'}
 <div id="cat_in" class="cat_ul" onclick="vv(className);">
 
 <div class="clearfix divt">
@@ -25,7 +26,7 @@ document.getElementById("cat_in").className='cat_ul';
   <div style="margin-left:130px"><span id="car_good_num"></span></div>
 </div>
 </div>
-<ul class="cart_box clearfix" id="eycart">
+<ul class="cart_box clearfix" id="eycart" onload="this.style.display="none"">
 {/if}
 <!-- {if $goods_list_cart} -->
 {foreach from=$goods_list_cart item=goods name=goods key=key}

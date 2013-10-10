@@ -14,10 +14,10 @@
  */
 
 $_LANG['select_method'] = '选择商品的方式：';
-$_LANG['by_cat'] = '根据商品分类、品牌';
+$_LANG['by_cat'] = '根据商品分类、农民';
 $_LANG['by_sn'] = '根据商品货号';
 $_LANG['select_cat'] = '选择商品分类：';
-$_LANG['select_brand'] = '选择商品品牌：';
+$_LANG['select_brand'] = '选择农民：';
 $_LANG['goods_list'] = '商品列表：';
 $_LANG['src_list'] = '待选列表：';
 $_LANG['dest_list'] = '选定列表：';
@@ -40,7 +40,7 @@ $_LANG['shop_price'] = '本店价格';
 $_LANG['integral'] = '积分购买';
 $_LANG['give_integral'] = '赠送积分';
 $_LANG['goods_number'] = '库存';
-$_LANG['brand'] = '品牌';
+$_LANG['brand'] = '农民';
 
 $_LANG['batch_edit_ok'] = '批量修改成功';
 
@@ -76,7 +76,7 @@ $_LANG['js_languages']['please_upload_file'] = '请您上传批量csv文件';
 // 批量上传商品的字段
 $_LANG['upload_goods']['goods_name'] = '商品名称';
 $_LANG['upload_goods']['goods_sn'] = '商品货号';
-$_LANG['upload_goods']['brand_name'] = '商品品牌';   // 需要转换成brand_id
+$_LANG['upload_goods']['brand_name'] = '农民';   // 需要转换成brand_id
 $_LANG['upload_goods']['market_price'] = '市场售价';
 $_LANG['upload_goods']['shop_price'] = '本店售价';
 $_LANG['upload_goods']['integral'] = '积分购买额度';

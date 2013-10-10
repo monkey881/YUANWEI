@@ -1660,7 +1660,9 @@ function assign_template($ctype = '', $catlist = array())
     $smarty->assign('category_list', cat_list(0, 0, true,  2, false));
     $smarty->assign('catalog_list',  cat_list(0, 0, false, 1, false));
     $smarty->assign('navigator_list',        get_navigator($ctype, $catlist));  //自定义导航栏
-
+    $smarty->assign('news',				index_get_news());			//二次开发增加新闻
+    $smarty->assign('goods_category_num',get_goods_category_num()); //二次开发增加食品种类数目
+    $smarty->assign('month_now',date('m'));//二次开发增加当前月份
     if (!empty($GLOBALS['_CFG']['search_keywords']))
     {
         $searchkeywords = explode(',', trim($GLOBALS['_CFG']['search_keywords']));
@@ -1684,6 +1686,43 @@ function time2gmt($time)
 {
     return strtotime(gmdate('Y-m-d H:i:s', $time));
 }
+
+
+/**二次开发
+ * 获得最新的新闻列表。
+ *
+ * @access  private
+ * @return  array
+ */
+function index_get_news()
+{
+    $sql = 'SELECT a.article_id, a.title, ac.cat_name, a.add_time, a.file_url, a.open_type, ac.cat_id, ac.cat_name ' .
+            ' FROM ' . $GLOBALS['ecs']->table('article') . ' AS a, ' .
+                $GLOBALS['ecs']->table('article_cat') . ' AS ac' .
+            ' WHERE a.is_open = 1 AND a.cat_id = ac.cat_id AND ac.cat_name = "站内快讯"' .
+            ' ORDER BY a.article_type DESC, a.add_time DESC LIMIT ' . $GLOBALS['_CFG']['article_number'];
+    $res = $GLOBALS['db']->getAll($sql);
+
+    $arr = array();
+    foreach ($res AS $idx => $row)
+    {
+        $arr[$idx]['id']          = $row['article_id'];
+        $arr[$idx]['title']       = $row['title'];
+        $arr[$idx]['short_title'] = $GLOBALS['_CFG']['article_title_length'] > 0 ?
+                                        sub_str($row['title'], $GLOBALS['_CFG']['article_title_length']) : $row['title'];
+        $arr[$idx]['cat_name']    = $row['cat_name'];
+        $arr[$idx]['add_time']    = local_date($GLOBALS['_CFG']['date_format'], $row['add_time']);
+        $arr[$idx]['url']         = $row['open_type'] != 1 ?
+                                        build_uri('article', array('aid' => $row['article_id']), $row['title']) : trim($row['file_url']);
+        $arr[$idx]['cat_url']     = build_uri('article_cat', array('acid' => $row['cat_id']), $row['cat_name']);
+    }
+
+    return $arr;
+}
+
+
+
+
 
 /**
  * 查询会员的红包金额
@@ -2136,6 +2175,13 @@ function sort_flag($filter)
 
     return $flag;
 }
+//二次开发获取所有食品种类的数目
+function get_goods_category_num(){
+    $sql = "SELECT COUNT(*) FROM `ecs_goods` WHERE is_delete = 0";
+    $res = $GLOBALS['db']->getOne($sql);
+    return $res;
+}
+
 
 /**
  * 分页的信息加入条件的数组

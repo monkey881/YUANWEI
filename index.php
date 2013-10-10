@@ -589,7 +589,6 @@ document.onmouseup = dropIt;
 }      
 if(NS || IE) action = window.setInterval("heartBeat()",1);      
 </script>
-<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
 
 <div style="display:none">not_del</div>
 

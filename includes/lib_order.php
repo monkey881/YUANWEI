@@ -588,6 +588,9 @@ function order_fee($order, $goods, $consignee)
 
         $total['goods_price']  += $val['goods_price'] * $val['goods_number'];
         $total['market_price'] += $val['market_price'] * $val['goods_number'];
+		if($val['is_taocan']){
+		$yunfei+=$val['yunfei'];
+		}
     }
 
     $total['saving']    = $total['market_price'] - $total['goods_price'];
@@ -687,9 +690,13 @@ function order_fee($order, $goods, $consignee)
             // 查看购物车中是否全为免运费商品，若是则把运费赋为零
             $sql = 'SELECT count(*) FROM ' . $GLOBALS['ecs']->table('cart') . " WHERE  `session_id` = '" . SESS_ID. "' AND `extension_code` != 'package_buy' AND `is_shipping` = 0";
             $shipping_count = $GLOBALS['db']->getOne($sql);
-
+			
+			if($yunfei&&$order['shipping_id']==5){
+				$total['shipping_fee']=$yunfei;
+			}
+			else{
             $total['shipping_fee'] = ($shipping_count == 0 AND $weight_price['free_shipping'] == 1) ?0 :  shipping_fee($shipping_info['shipping_code'],$shipping_info['configure'], $weight_price['weight'], $total['goods_price'], $weight_price['number']);
-
+			}
             if (!empty($order['need_insure']) && $shipping_info['insure'] > 0)
             {
                 $total['shipping_insure'] = shipping_insure_fee($shipping_info['shipping_code'],
@@ -874,7 +881,7 @@ function get_order_sn()
 function cart_goods($type = CART_GENERAL_GOODS)
 {
     $sql = "SELECT rec_id, user_id, goods_id, goods_name, goods_sn, goods_number, " .
-            "market_price, goods_price,goods_weight,goods_attr, is_real,is_taocan,ps_weight, extension_code, parent_id, is_gift, is_shipping, " .
+            "market_price, goods_price,goods_weight,goods_attr, is_real,is_taocan,ps_weight, extension_code, parent_id, is_gift, is_shipping,yunfei, " .
             "goods_price * goods_number AS subtotal " .
             "FROM " . $GLOBALS['ecs']->table('cart') .
             " WHERE session_id = '" . SESS_ID . "' " .
@@ -1033,7 +1040,7 @@ function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0)
     $sql = "SELECT g.goods_name, g.goods_sn, g.is_on_sale, g.is_real, ".
                 "g.market_price, g.shop_price AS org_price, g.promote_price, g.promote_start_date, ".
                 "g.promote_end_date, g.goods_weight, g.integral, g.extension_code, ".
-                "g.goods_number, g.is_alone_sale, g.is_shipping,g.is_taocan,g.ps_weight,".
+                "g.goods_number, g.is_alone_sale, g.is_shipping,g.is_taocan,g.ps_weight,g.yunfei,".
                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price ".
             " FROM " .$GLOBALS['ecs']->table('goods'). " AS g ".
             " LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
@@ -1139,6 +1146,7 @@ function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0)
         'is_real'       => $goods['is_real'],
 		'is_taocan'       => $goods['is_taocan'],
 		'ps_weight'       => $goods['ps_weight'],
+		'yunfei'       => $goods['yunfei'],
 		'goods_weight'       => $goods['goods_weight'],
         'extension_code'=> $goods['extension_code'],
         'is_gift'       => 0,

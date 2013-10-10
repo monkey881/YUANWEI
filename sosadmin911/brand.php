@@ -17,6 +17,8 @@ define('IN_ECS', true);
 
 require(dirname(__FILE__) . '/includes/init.php');
 include_once(ROOT_PATH . 'includes/cls_image.php');
+include_once(ROOT_PATH . 'includes/fckeditor/fckeditor.php'); // 包含 html editor 类文件
+
 $image = new cls_image($_CFG['bgcolor']);
 
 $exc = new exchange($ecs->table("brand"), $db, 'brand_id', 'brand_name');
@@ -48,7 +50,7 @@ elseif ($_REQUEST['act'] == 'add')
 {
     /* 权限判断 */
     admin_priv('brand_manage');
-
+    create_html_editor('brand_desc');
     $smarty->assign('ur_here',     $_LANG['07_brand_add']);
     $smarty->assign('action_link', array('text' => $_LANG['06_goods_brand_list'], 'href' => 'brand.php?act=list'));
     $smarty->assign('form_action', 'insert');
@@ -84,9 +86,13 @@ elseif ($_REQUEST['act'] == 'insert')
     $site_url = sanitize_url( $_POST['site_url'] );
 
     /*插入数据*/
-
-    $sql = "INSERT INTO ".$ecs->table('brand')."(brand_name, site_url, brand_desc, brand_logo, is_show, sort_order) ".
-           "VALUES ('$_POST[brand_name]', '$site_url', '$_POST[brand_desc]', '$img_name', '$is_show', '$_POST[sort_order]')";
+    $addtime = mktime();
+    $sql = "SELECT `goods_img` FROM `ecs_goods` WHERE  `goods_id` in ($_POST[image1],$_POST[image2])";
+    $result=$db->getAll($sql);
+    $image1= $result[0][goods_img];
+    $image2= $result[1][goods_img];
+    $sql = "INSERT INTO ".$ecs->table('brand')."(brand_name, site_url, brand_desc, brand_logo, is_show, sort_order,gend,age,tel,yangzhi_age,address,addtime,sologan,toptext,image1,image2,nongchanpin,bottomtext,type) ".
+           "VALUES ('$_POST[brand_name]', '$site_url', '$_POST[brand_desc]', '$img_name', '$is_show', '$_POST[sort_order]','$_POST[gend]','$_POST[age]','$_POST[telephone]','$_POST[yangzhi_age]','$_POST[address]','$addtime','$_POST[sologan]','$_POST[toptext]','$image1','$image2','$_POST[nongchanpin]','$_POST[bottomtext]','$_POST[type]')";//二次开发
     $db->query($sql);
 
     admin_log($_POST['brand_name'],'add','brand');
@@ -110,13 +116,18 @@ elseif ($_REQUEST['act'] == 'edit')
 {
     /* 权限判断 */
     admin_priv('brand_manage');
-    $sql = "SELECT brand_id, brand_name, site_url, brand_logo, brand_desc, brand_logo, is_show, sort_order ".
+
+    $sql = "SELECT brand_id, brand_name, site_url, brand_logo, brand_desc, brand_logo, sologan,is_show, sort_order,age,gend,tel,address,yangzhi_age,image1,image2,toptext,nongchanpin,bottomtext,type ".//二次开发
             "FROM " .$ecs->table('brand'). " WHERE brand_id='$_REQUEST[id]'";
     $brand = $db->GetRow($sql);
+    
+    $brand["image1"]=substr ($brand["image1"], 24,3);  //二次开发
+    $brand["image2"]=substr ($brand["image2"], 24,3);
 
     $smarty->assign('ur_here',     $_LANG['brand_edit']);
     $smarty->assign('action_link', array('text' => $_LANG['06_goods_brand_list'], 'href' => 'brand.php?act=list&' . list_link_postfix()));
     $smarty->assign('brand',       $brand);
+    create_html_editor('brand_desc',$brand['brand_desc']);//二次开发
     $smarty->assign('form_action', 'updata');
 
     assign_query_info();
@@ -125,6 +136,7 @@ elseif ($_REQUEST['act'] == 'edit')
 elseif ($_REQUEST['act'] == 'updata')
 {
     admin_priv('brand_manage');
+    create_html_editor('brand_desc',$_POST['brand_desc']);//二次开发
     if ($_POST['brand_name'] != $_POST['old_brandname'])
     {
         /*检查品牌名是否相同*/
@@ -145,10 +157,14 @@ elseif ($_REQUEST['act'] == 'updata')
     $is_show = isset($_REQUEST['is_show']) ? intval($_REQUEST['is_show']) : 0;
      /*处理URL*/
     $site_url = sanitize_url( $_POST['site_url'] );
-
+    
+    $sql = "SELECT `goods_img` FROM `ecs_goods` WHERE  `goods_id` in ($_POST[image1],$_POST[image2])";
+    $result=$db->getAll($sql);
+    $image1= $result[0][goods_img];
+    $image2= $result[1][goods_img];
     /* 处理图片 */
     $img_name = basename($image->upload_image($_FILES['brand_logo'],'brandlogo'));
-    $param = "brand_name = '$_POST[brand_name]',  site_url='$site_url', brand_desc='$_POST[brand_desc]', is_show='$is_show', sort_order='$_POST[sort_order]' ";
+    $param = "brand_name = '$_POST[brand_name]',  site_url='$site_url', brand_desc='$_POST[brand_desc]', is_show='$is_show', sort_order='$_POST[sort_order]',age='$_POST[age]',tel='$_POST[telephone]',yangzhi_age='$_POST[yangzhi_age]',address='$_POST[address]',gend='$_POST[gend]' ,sologan='$_POST[sologan]',toptext='$_POST[toptext]',nongchanpin='$_POST[nongchanpin]',image1='$image1',image2='$image2',bottomtext='$_POST[bottomtext]',type='$_POST[type]'";//二次开发
     if (!empty($img_name))
     {
         //有图片上传

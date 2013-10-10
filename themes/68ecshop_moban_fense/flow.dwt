@@ -12,6 +12,7 @@
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
 {* 包含脚本文件 *}
+{insert_scripts files='jquery-1.10.2.min.js,json2.js'}
 {insert_scripts files='common.js,shopping_flow.js'}
 <script type="text/javascript" src="js/action.js"></script>
 <script type="text/javascript">
@@ -22,8 +23,14 @@ function add_num(rec_id,goods_id){
     }
     document.getElementById("goods_number_"+rec_id).value++;
     var number = document.getElementById("goods_number_"+rec_id).value;
-    Ajax.call('flow.php','step=update_group_cart&rec_id='+rec_id+'&number='+number+'&goods_id='+goods_id, changePriceResult,'GET','JSON');
-    }
+    $.ajax({
+		url:'flow.php',
+		data:{step:'update_group_cart',rec_id:rec_id,number:number,goods_id:goods_id},
+		success:changePriceResult,
+		type:'GET',
+		dataType:'json'
+	});
+	}
 function red_num(rec_id,goods_id){
     if(goods_id >=48 && goods_id<=55){
         alert("套餐只能选择一份！");
@@ -33,8 +40,13 @@ function red_num(rec_id,goods_id){
         document.getElementById("goods_number_"+rec_id).value--;
     }
     var number = document.getElementById("goods_number_"+rec_id).value;
-    Ajax.call('flow.php','step=update_group_cart&rec_id='+rec_id+'&number='+number+'&goods_id='+goods_id, changePriceResult,'GET','JSON');
-    
+    $.ajax({
+		url:'flow.php',
+		data:{step:'update_group_cart',rec_id:rec_id,number:number,goods_id:goods_id},
+		success:changePriceResult,
+		type:'GET',
+		dataType:'json'
+	});
 }
 function change_price(rec_id,goods_id){
     if(goods_id >=48 && goods_id<=55){
@@ -42,7 +54,13 @@ function change_price(rec_id,goods_id){
         return ;
     }
     var number = document.getElementById("goods_number_"+rec_id).value;
-    Ajax.call('flow.php','step=update_group_cart&rec_id='+rec_id+'&number='+number+'&goods_id='+goods_id, changePriceResult,'GET','JSON');
+    $.ajax({
+		url:'flow.php',
+		data:{step:'update_group_cart',rec_id:rec_id,number:number,goods_id:goods_id},
+		success:changePriceResult,
+		type:'GET',
+		dataType:'json'
+	});
 }
 function changePriceResult(result){
 if(result.error == 1){
@@ -54,7 +72,6 @@ if(result.error == 1){
     document.getElementById('market_amount_desc').innerHTML = result.market_amount_desc;
     }
 }
-
 </script>
 
 
@@ -75,9 +92,10 @@ if(result.error == 1){
   {/foreach}
   </script>
 <!-- 购物车内容 -->
-<div class="goodsTitle" style="background:#f6f6f6; border:#E3E3E3 solid 1px; border-bottom:none;">{$lang.goods_list}</div>
-    <form id="formCart" name="formCart" method="post" action="flow.php">
-         <table width="100%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#e3e3e3">
+<form id="formCart" name="formCart" method="post" action="flow.php">
+<div class="goodsTitle" style="background:#f6f6f6; border:#E3E3E3 solid 1px; border-bottom:none;">{$lang.goods_list}
+<input name="submit" type="submit" class="bnt_number6" value="{$lang.update_cart}"  style=" padding:3px; background:#F60; cursor:pointer; color:white; margin-left:20px;"/>
+</div>         <table width="100%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#e3e3e3">
             <tr>
                 <th bgcolor="#ffffff">{$lang.goods_name}</th>
                 <!-- {if $show_goods_attribute eq 1} 显示商品属性 -->
@@ -159,7 +177,7 @@ if(result.error == 1){
                 </td>
                 <td align="right">
                     <input type="button" value="{$lang.clear_cart}" class="bnt_number6" onclick="location.href='flow.php?step=clear'" />
-                    <input name="submit" type="submit" class="bnt_number6" value="{$lang.update_cart}" />
+                    
                 </td>
             </tr>
         </table>
@@ -173,7 +191,6 @@ if(result.error == 1){
     </table>
     
  <!-- {if $smarty.session.user_id gt 0} -->
- {insert_scripts files='transport.js'}
  <script type="text/javascript" charset="utf-8">
     function collect_to_flow(goodsId)
     {
@@ -185,7 +202,13 @@ if(result.error == 1){
         goods.goods_id = goodsId;
         goods.number   = number;
         goods.parent   = 0;
-        Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), collect_to_flow_response, 'POST', 'JSON');
+		$.ajax({
+			url:'flow.php?step=add_to_cart',
+			data:{goods:JSON.stringify(goods)},
+			success:collect_to_flow_response,
+			type:'POST',
+			dataType:'json'
+		});
     }
     function collect_to_flow_response(result)
         {
@@ -232,7 +255,6 @@ if(result.error == 1){
 
 
 <!-- {if $fittings_list} 商品配件 -->
-{insert_scripts files='transport.js'}
   <script type="text/javascript" charset="utf-8">
   function fittings_to_flow(goodsId,parentId)
   {
@@ -243,7 +265,13 @@ if(result.error == 1){
     goods.goods_id = goodsId;
     goods.number   = number;
     goods.parent   = parentId;
-    Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), fittings_to_flow_response, 'POST', 'JSON');
+	$.ajax({
+		url:'flow.php?step=add_to_cart',
+		data:{goods:JSON.stringify(goods)},
+		success:fittings_to_flow_response,
+		type:'POST',
+		dataType:'json'
+	});
   }
     function fittings_to_flow_response(result)
   {
@@ -472,21 +500,29 @@ var flow_no_shipping = "{$lang.flow_no_shipping}";
 <table width="100%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#e3e3e3" class="floatTable" id="shippingTable">
         <tr>
             <th bgcolor="#ffffff" width="5%">&nbsp;</th>
-            <th bgcolor="#ffffff" width="25%">{$lang.name}</th>
+            <th bgcolor="#ffffff" width="10%">{$lang.name}</th>
             <th bgcolor="#ffffff">{$lang.describe}</th>
-            <th bgcolor="#ffffff" width="15%">{$lang.fee}</th>
-            <th bgcolor="#ffffff" width="15%">{$lang.free_money}</th>
-            <th bgcolor="#ffffff" width="15%">{$lang.insure_fee}</th>
+            <th bgcolor="#ffffff" width="60%">{$lang.fee}</th>
+           
         </tr>
         <!-- {foreach from=$shipping_list item=shipping} 循环配送方式 -->
         <tr>
             <td bgcolor="#ffffff" valign="top"><input name="shipping" type="radio" value="{$shipping.shipping_id}" {if $order.shipping_id eq $shipping.shipping_id}checked="true"{/if} supportCod="{$shipping.support_cod}" insure="{$shipping.insure}" onclick="selectShipping(this)" />
             </td>
             <td bgcolor="#ffffff" valign="top"><strong>{$shipping.shipping_name}</strong></td>
-            <td bgcolor="#ffffff" valign="top">{$shipping.shipping_desc}</td>
-            <td bgcolor="#ffffff" align="right" valign="top" class="f1">{$shipping.format_shipping_fee}</td>
-            <td bgcolor="#ffffff" align="right" valign="top" class="f1">{$shipping.free_money}</td>
-            <td bgcolor="#ffffff" align="right" valign="top">{if $shipping.insure neq 0}{$shipping.insure_formated}{else}{$lang.not_support_insure}{/if}</td>
+            <td bgcolor="#ffffff" valign="top">
+            <!--{if $shipping.shipping_name eq '上门取货'}-->买家到指定的地点取货，但因为丢失的问题，今后会逐步减少<!--{/if}-->
+            <!--{if $shipping.shipping_name eq '市内配送'}-->司机送货到每个消费者的小区门口，来之前电话，请下楼签收，或者安排门卫或物业签收。<!--{/if}-->
+            </td>
+            
+            <td bgcolor="#ffffff" align="left" valign="top" class="f1">
+            <!--{if $shipping.shipping_name eq '上门取货'}-->
+            (1)上门取货无运费发生，但凡购买水果、大米、活物等较贵重且易丢失商品的，选择市内配送，否则平台无法对此负责！<br>
+            (2)取货点若是单位门卫、或是小区物业，在有人签字的情况下，可以选择。<!--{/if}-->
+            <!--{if $shipping.shipping_name eq '市内配送'}-->6元/次。<br>(1)允许会员之间互相帮了签收，可以只收1份运费的费用.<br>(2)购买的蔬菜套餐包含运费的，或者已经购买配送订单的，则在此选择上门取货。<br />(3)购买蔬菜套餐，且选择市内配送后，则是一个配送总费用，请注意！
+<!--{/if}-->
+            </td>
+           
         </tr>
         <!-- {/foreach} 循环配送方式 -->
         <tr>

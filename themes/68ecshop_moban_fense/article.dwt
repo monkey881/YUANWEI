@@ -12,10 +12,12 @@
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
 {* 包含脚本文件 *}
+{insert_scripts files='jquery-1.10.2.min.js,json2.js'}
 {insert_scripts files='common.js'}
 <script type="text/javascript" src="js/action.js"></script>
 <style>
 .ur_here{ width:760px;}
+#article img{ max-width:750px;}
 </style>
 </head>
 <body>
@@ -42,10 +44,15 @@
 		<!--{/foreach}--> 
 	 </div>
 	</div>
-	<script type="text/javascript">divheight("articleRelated");</script>
+	<script type="text/javascript">//divheight("articleRelated");</script>
 	<!-- {/if} --> 
 	<!-- TemplateBeginEditable name="右边区域" -->
+    {if $article.cat_id=='21'}
+    <!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem --> 
+    {else}
     <!-- #BeginLibraryItem "/library/article_category_tree.lbi" --><!-- #EndLibraryItem -->
+    {/if}
+    
 	<!-- #BeginLibraryItem "/library/helpleft.lbi" --><!-- #EndLibraryItem -->
   <!-- TemplateEndEditable -->
 	</div>
@@ -90,7 +97,7 @@
              </span>
 		 </div>
 	</div>	
-
+ <!-- #BeginLibraryItem "/library/comments.lbi" --><!-- #EndLibraryItem -->
 	</div>
 
 </div>

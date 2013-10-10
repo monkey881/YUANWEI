@@ -107,7 +107,8 @@
 <script type="text/javascript">
 onload = function()
 {
-  Ajax.call('index.php?is_ajax=1&act=license','', start_sendmail_Response, 'GET', 'JSON');
+	//去除代码提交
+  //Ajax.call('index.php?is_ajax=1&act=license','', start_sendmail_Response, 'GET', 'JSON');
 }
 /**
  * 帮助系统调用
@@ -191,10 +192,13 @@ var adminId = "{$admin_id}";
   <div id="license-div" style="bgcolor:#000000;"></div>
   <div id="submenu-div">
     <ul>
-      <li><a href="index.php?act=about_us" target="main-frame">{$lang.about}</a></li>
-      <li><a href="javascript:web_address();">{$lang.help}</a></li>
+      
+     
       <li><a href="../" target="_blank">{$lang.preview}</a></li>
       <li><a href="message.php?act=list" target="main-frame">{$lang.view_message}</a></li>
+      &nbsp;
+      <li><a href="../mygroupon/index.php?act=main" target="_banket" style="color:white;">原味生活团购后台</a></li>
+      &nbsp;
       <li><a href="privilege.php?act=modif" target="main-frame">{$lang.profile}</a></li>
       <li><a href="javascript:window.top.frames['main-frame'].document.location.reload();window.top.frames['header-frame'].document.location.reload()">{$lang.refresh}</a></li>
       <li><a href="#"  onclick="ShowToDoList()">{$lang.todolist}</a></li>

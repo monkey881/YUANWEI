@@ -12,6 +12,7 @@
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
 {* 包含脚本文件 *}
+{insert_scripts files='jquery-1.10.2.min.js,json2.js'}
 {insert_scripts files='common.js'}
 <script type="text/javascript" src="themes/68ecshop_moban_fense/js/mzp-packed-me.js"></script>
 <script type="text/javascript" src="themes/68ecshop_moban_fense/js/action.js"></script>
@@ -41,7 +42,7 @@
 
 
 <!-- #BeginLibraryItem "/library/maskbuy.lbi" --><!-- #EndLibraryItem -->
-<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_header2.lbi" --><!-- #EndLibraryItem -->
 
 
 <div class="block clearfix">
@@ -135,7 +136,8 @@
            
             <li>
             <!-- {if $goods.goods_brand neq "" and $cfg.show_brand} 显示商品品牌-->
-            生产农户：<a href="{$goods.goods_brand_url}" ><span class="nonghu"  style="color:white; background-color: #093;">{$goods.goods_brand}</span></a>
+            生产农户：<a href="{$goods.goods_brand_url}" >
+<img src="data/brandlogo/{$goods.brand_logo}" width="50" height="50" style=" vertical-align: middle;border-radius:4px; margin-left:16px;" alt="{$goods.goods_brand}" title="{$goods.goods_brand}"/></a>
             <!--{/if}-->
             </li>
             <li>
@@ -155,7 +157,17 @@
             </li>
             <li>
             <!-- {if $goods.biaozhun} 标准-->
-            生产标准：<!-- {if $goods.biaozhun eq '0农药有机肥'} 标准--><a href="article.php?id=124"> <!-- {/if} --><!-- {if $goods.biaozhun eq '原味菌菇'} 标准--><a href="article.php?id=255"> <!-- {/if} --><!-- {if $goods.biaozhun eq '原味蛋'} 标准--><a href="article.php?id=250"> <!-- {/if} --><span class="biaozhun" style="color: #FFF; background-color: #FC0;">{$goods.biaozhun}</span></a>
+            生产标准：
+            <!-- {if $goods.biaozhun eq '0农药有机肥'} 标准--><a href="article.php?id=124"> <!-- {/if} -->
+            <!-- {if $goods.biaozhun eq '原味菌菇'} 标准--><a href="article.php?id=255"> <!-- {/if} -->
+            <!-- {if $goods.biaozhun eq '原味蛋'} 标准--><a href="article.php?id=250"> <!-- {/if} -->
+            <!-- {if $goods.biaozhun eq '原味葡萄'} 标准--><a href="article.php?id=501"> <!-- {/if} -->
+            <!--{if $goods.biaozhun eq '原味梨'}标准--><a href="article.php?id=509"><!--{/if}-->
+            <span class="biaozhun" style="color: #FFF; background-color:#32A30E;">{$goods.biaozhun}
+            <!-- {if $goods.biaozhun eq '0农药有机肥'} 标准-->（种植过程0农药）<!-- {/if} -->
+            <!-- {if $goods.biaozhun eq '原味葡萄'} 标准-->（合理用药）<!-- {/if} -->
+            <!--{if $goods.biaozhun eq '原味梨'}标准-->（合理用药）<!--{/if}-->
+            </span></a>
             <!-- {/if} -->
             </li>
             <li>
@@ -177,7 +189,7 @@
             <!-- {if $goods.goods_number eq 0} -->
             {$lang.goods_number}<img src="images/wuhuo.gif" />
             <!-- {else} -->
-            {$lang.goods_number}<span style=" font-weight: bold; font-size: 16px;"> {$goods.goods_number} {$goods.measure_unit}</span>
+            {$lang.goods_number}<span style=" font-weight: bold; font-size: 16px;"> {$goods.goods_number} <!--$goods.measure_unit--></span>
             <!-- {/if} -->
             <!-- {/if} --><br />
             
@@ -234,29 +246,80 @@
           <font class="a f14b" style="font-size:12px;">{$lang.goods_free_shipping}</font>
           <!-- {/if} -->
             <br />
-            <a href="javascript:addToCart({$goods.goods_id})" style="padding-left:8px;"><img src="images/by_btnn_03.gif" /></a> 
+            <a href="{if $goods.goods_id==181}{if @$usercookie==1}javascript:addToCart({$goods.goods_id}){else}/ori-life/user_award.php{/if}{else}javascript:addToCart({$goods.goods_id}){/if}" style="padding-left:8px;"><img src="images/by_btnn_03.gif" /></a> 
             </div>
         </form>
         </div>
     </div>
-    <div class="infotit clearfix" id="com_b">
-        <h2>{$lang.feed_goods_desc}</h2>	
-    </div>
+    
+    <br />
+<script>
+function changeBody(index){
+  switch(index){
+    case 1:{
+      document.getElementById('com_h').style.display = "";
+      document.getElementById('related_d').style.display = "none";
+      document.getElementById('ECS_COMMENT').style.display = "none";
+	  document.getElementById('1c').style.color = "red";
+	  document.getElementById('2c').style.color = "";
+	  document.getElementById('3c').style.color = "";
+	  break;
+    }
+    case 2:{
+      document.getElementById('com_h').style.display = "none";
+      document.getElementById('related_d').style.display = "";
+      document.getElementById('ECS_COMMENT').style.display = "none";
+	  document.getElementById('1c').style.color = "";
+	  document.getElementById('2c').style.color = "red";
+	  document.getElementById('3c').style.color = "";
+	  break;
+    }
+    case 3:{
+      document.getElementById('com_h').style.display = "none";
+      document.getElementById('related_d').style.display = "none";
+      document.getElementById('ECS_COMMENT').style.display = "";
+	  document.getElementById('1c').style.color = "";
+	  document.getElementById('2c').style.color = "";
+	  document.getElementById('3c').style.color = "red";
+	  break;
+    }
+  }
+  
+  if(window.location.hash=='#3c')  //评论显示
+  changeBody(3);
+
+}
+
+function Start(){
+setInterval(function(){changeBody(1);}, 1000); //每3秒调用一次方法
+}
+setTimeout(Start, 100);//延迟开始周期回调
+</script>    
+
+<div class="infotit clearfix" id="com_b">
+        <h2 style="cursor: pointer; " onclick="javascript:changeBody(1)" id="1c">商品描述</a></h2>
+        <h2 style="cursor: pointer; " onclick="javascript:changeBody(2)" id="2c">推荐菜谱</a></h2>
+        <h2 style="cursor: pointer; " onclick="javascript:changeBody(3)" id="3c">用户评论</a></h2>	
+</div> 
+ 
+
      <div class="tagcontent" id="com_v"></div>
      <div id="com_h">
-           <blockquote>
+     <blockquote>
         {$goods.goods_desc}
-       </blockquote>
-         </div>
-         <div style="clear:both;"></div>
-    <script type="text/javascript">reg("com");</script>
-    <!-- #BeginLibraryItem "/library/goods_related.lbi" --><!-- #EndLibraryItem -->
+      </blockquote>
+      </div>
+      <div style="clear:both;"></div>
+     <!--<script type="text/javascript">reg("com");</script>-->
+     <!-- #BeginLibraryItem "/library/goods_related.lbi" --><!-- #EndLibraryItem -->
      <!-- TemplateBeginEditable name="右边可编辑区" -->
       <!-- #BeginLibraryItem "/library/goods_article.lbi" --><!-- #EndLibraryItem -->
      <!-- #BeginLibraryItem "/library/comments.lbi" --><!-- #EndLibraryItem -->
      <!-- TemplateEndEditable -->
-    </div>
+
 </div>
+</div>
+
 
 <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
@@ -286,8 +349,13 @@ function changePrice()
 {
   var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
   var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
-
-  Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+	$.ajax({
+		url:'goods.php',
+		data:{act:'price',id:goodsId,attr:attr,number:qty},
+		success:changePriceResponse,
+		type:'GET',
+		dataType:'json'
+	});
 }
 
 /**

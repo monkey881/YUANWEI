@@ -54,7 +54,7 @@ $_LANG['not_writable_warning'] = '目录 %s 不可写，您需要把该目录设
 //-- 商品列表
 /*------------------------------------------------------ */
 $_LANG['goods_cat'] = '所有分类';
-$_LANG['goods_brand'] = '所有品牌';
+$_LANG['goods_brand'] = '所有农民';
 $_LANG['intro_type'] = '全部';
 $_LANG['keyword'] = '关键字';
 $_LANG['is_best'] = '精品';
@@ -106,7 +106,7 @@ $_LANG['lab_goods_name'] = '商品名称：';
 $_LANG['lab_goods_sn'] = '商品货号：';
 $_LANG['lab_goods_cat'] = '商品分类：';
 $_LANG['lab_other_cat'] = '扩展分类：';
-$_LANG['lab_goods_brand'] = '商品品牌：';
+$_LANG['lab_goods_brand'] = '农民：';
 $_LANG['lab_shop_price'] = '本店售价：';
 $_LANG['lab_market_price'] = '市场售价：';
 $_LANG['lab_user_price'] = '会员价格：';
@@ -165,9 +165,9 @@ $_LANG['select_font'] = '字体样式';
 $_LANG['font_styles'] = array('strong' => '加粗', 'em' => '斜体', 'u' => '下划线', 'strike' => '删除线');
 
 $_LANG['rapid_add_cat'] = '添加分类';
-$_LANG['rapid_add_brand'] = '添加品牌';
+$_LANG['rapid_add_brand'] = '添加农民';
 $_LANG['category_manage'] = '分类管理';
-$_LANG['brand_manage'] = '品牌管理';
+$_LANG['brand_manage'] = '农民管理';
 $_LANG['hide'] = '隐藏';
 
 $_LANG['lab_volume_price']         = '商品优惠价格：';
@@ -213,7 +213,7 @@ $_LANG['goods_not_in_recycle_bin'] = '该商品尚未放入回收站，不能删
 $_LANG['js_languages']['goods_name_not_null'] = '商品名称不能为空。';
 $_LANG['js_languages']['goods_cat_not_null'] = '商品分类必须选择。';
 $_LANG['js_languages']['category_cat_not_null'] = '分类名称不能为空';
-$_LANG['js_languages']['brand_cat_not_null'] = '品牌名称不能为空';
+$_LANG['js_languages']['brand_cat_not_null'] = '农民名称不能为空';
 $_LANG['js_languages']['goods_cat_not_leaf'] = '您选择的商品分类不是底级分类，请选择底级分类。';
 $_LANG['js_languages']['shop_price_not_null'] = '本店售价不能为空。';
 $_LANG['js_languages']['shop_price_not_number'] = '本店售价不是数值。';
@@ -234,7 +234,7 @@ $_LANG['js_languages']['drop_img_confirm'] = '您确实要删除该图片吗？'
 $_LANG['js_languages']['batch_no_on_sale'] = '您确实要将选定的商品下架吗？';
 $_LANG['js_languages']['batch_trash_confirm'] = '您确实要把选中的商品放入回收站吗？';
 $_LANG['js_languages']['go_category_page'] = '本页数据将丢失，确认要去商品分类页添加分类吗？';
-$_LANG['js_languages']['go_brand_page'] = '本页数据将丢失，确认要去商品品牌页添加品牌吗？';
+$_LANG['js_languages']['go_brand_page'] = '本页数据将丢失，确认要去农民页添加农民吗？';
 
 $_LANG['js_languages']['volume_num_not_null'] = '请输入优惠数量';
 $_LANG['js_languages']['volume_num_not_number'] = '优惠数量不是数字';

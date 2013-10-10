@@ -1,23 +1,20 @@
-<?php
+﻿<?php
 
 /**
- * ECSHOP 支付响应页面
+ * ECGROUPON 团购商品前台文件
  * ============================================================================
- * * 版权所有 2005-2012 上海商派网络科技有限公司，并保留所有权利。
- * 网站地址: http://www.ecshop.com；
- * ----------------------------------------------------------------------------
- * 这不是一个自由软件！您只能在不用于商业目的的前提下对程序代码进行修改和
- * 使用；不允许对程序代码以任何形式任何目的的再发布。
- * ============================================================================
- * $Author: liubo $
- * $Id: respond.php 17217 2011-01-19 06:29:08Z liubo $
+ * 网站地址: http://www.ecgroupon.com；
  */
 
 define('IN_ECS', true);
 
 require(dirname(__FILE__) . '/includes/init.php');
+require(ROOT_PATH . 'includes/lib_group.php');
 require(ROOT_PATH . 'includes/lib_payment.php');
 require(ROOT_PATH . 'includes/lib_order.php');
+$smarty->tmp_dir = 'template/' . $_CFG['formwork'] . '/';
+$smarty->template_dir = ROOT_PATH . 'template/' . $_CFG['formwork'];
+
 /* 支付方式代码 */
 $pay_code = !empty($_REQUEST['code']) ? trim($_REQUEST['code']) : '';
 
@@ -70,7 +67,12 @@ else
             include_once($plugin_file);
 
             $payment = new $pay_code();
-            $msg     = (@$payment->respond()) ? $_LANG['pay_success'] : $_LANG['pay_fail'];
+			if($payment->respond())
+			{
+				header("Location: /user.php?act=order_list");
+				exit;
+				}
+            //$msg     = ($payment->respond()) ? $_LANG['pay_success'] : $_LANG['pay_fail'];
         }
         else
         {
@@ -78,18 +80,10 @@ else
         }
     }
 }
-
-assign_template();
-$position = assign_ur_here();
-$smarty->assign('page_title', $position['title']);   // 页面标题
-$smarty->assign('ur_here',    $position['ur_here']); // 当前位置
-$smarty->assign('page_title', $position['title']);   // 页面标题
-$smarty->assign('ur_here',    $position['ur_here']); // 当前位置
-$smarty->assign('helps',      get_shop_help());      // 网店帮助
-
+$city_id = isset($_COOKIE['ECS']['cityid']) && intval($_COOKIE['ECS']['cityid']) > 0 ? intval($_COOKIE['ECS']['cityid']) : $_CFG['group_city'];
+assign_public($city_id);
 $smarty->assign('message',    $msg);
 $smarty->assign('shop_url',   $ecs->url());
-
 $smarty->display('respond.dwt');
 
 ?>

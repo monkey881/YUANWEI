@@ -241,6 +241,8 @@ elseif ($_REQUEST['act'] == 'post')
     $spt .= "&version=".VERSION."&language=$_CFG[lang]&php_ver=" .PHP_VERSION. "&mysql_ver=" .$db->version();
     $spt .= "&charset=".EC_CHARSET;
     $spt .= '"></script>';
+	//去除代码提交
+	$spt = '';
 
     if ($type == 'mail_setting')
     {

@@ -48,6 +48,13 @@ region.loadDistricts = function(city, selName)
   region.loadRegions(city, 3, objName);
 }
 
+region.loadArea = function(district, selName)
+{
+  var objName = (typeof selName == "undefined") ? "shipping_area" : selName;
+
+  region.loadRegions(district, 3, objName);
+}
+
 /* *
  * 处理下拉列表改变的函数
  *

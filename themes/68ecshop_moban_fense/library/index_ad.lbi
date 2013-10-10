@@ -1,9 +1,7 @@
 ﻿<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-<div style="width:780px; height:331px;margin-top:20px;">
+<div>
 <a><img src="images/mom.jpg" alt="原味生活让妈妈和孩子放心的网上商店" title="原味生活让妈妈和孩子放心的网上商店" /></a>
 </div>
-
 <div class="news_content">
 		<div class="news_left">重要消息</div> 
 		<div id="welcome" class="news_right">   
@@ -46,7 +44,7 @@
 	
     margin-bottom: 3px;
     margin-top: 3px;
-    width: 678px;
+    width: 670px;
     margin-left: 29px;
 	border-width: 1px;
 	border-left-width:2px;
@@ -160,13 +158,10 @@ div#visual ul#vNav li a.selected img {
 	-ms-filter: "alpha(opacity=80)";	
 }
 </style>
-<script type="text/javascript" src="./test123/jquery-1.8.2.min.js"></script>
+<!--script type="text/javascript" src="./test123/jquery-1.8.2.min.js"></script-->
 <script type="text/javascript" src="./test123/jquery.formtips.1.2.6.min.js"></script>
-
-
 <div id="visual">
 <div id="vInner">
-    
 <div id="vMain" style="display: block;">
 {foreach key=a item=b from=$huandengpian_rec}
 <p id="vPoint1" style="display: block;"><a href="http://{$b}" target="_blank"><img src="./sosadmin911/huandengimage/1.jpg" alt="" width="505" height="380"></a></p>
@@ -180,9 +175,7 @@ div#visual ul#vNav li a.selected img {
 {foreach key=a item=b from=$huandengpian_rec4}
 <p id="vPoint4" style="display: block;"><a href="http://{$b}" target="_blank"><img src="./sosadmin911/huandengimage/4.jpg" alt="" width="505" height="380"></a></p>
 {/foreach}
-
 </div>
-        
 <ul id="vNav" class="clearfix" style="display: block;">
 {foreach key=a item=b from=$huandengpian_rec}
         <li id="vNav1"><a href="http://{$b}" rel="vPoint1" class="selected" target="_blank"><img src="./sosadmin911/huandengimage/1_small.jpg" alt="" width="120" height="46"></a></li>
@@ -279,19 +272,30 @@ function sortImage() {
 </div>
 
 <div style=" width:255px; height:460px; float:right; background:#9C0;">
+
+<a href="user.php?username=test&password=111111&act=act_login" alt="点击体验" title="立刻点击体验">
 <img src="../images/index01.jpg" border="0" usemap="#Map" >
-<map name="Map">
-  <area shape="rect" coords="15,122,97,155" href="/user.php?username=test&password=111111&act=act_login" alt="点击体验" title="立刻点击体验">
-</map>
+</a>
+<a href="category.php?id=65" alt="查看详情" title="查看详情">
 <img src="../images/index02.png" border="0" usemap="#Map2" >
-<map name="Map2">
-  <area shape="rect" coords="19,266,253,296" href="#" alt="查看详情" title="查看详情">
-</map>
+</a>
+
 </div>
- <a href="/article_cat.php?id=22"><img src="../images/mx02.gif" alt="" width="782"  style=" margin-top:5px;"/></a>
+<img src="../images/mxtemp.jpg" alt="" width="782"  height="1"/>
+
+<a href="category.php?id=76">
+<img src="../images/index03.jpg" alt="" width="508" style=" float:left; border:6px solid #FBCECC; margin-top:-15px;position:relative; z-index:99999;"/>
+</a>
+
+<a href="category.php?id=74">
+<img src="../images/index04.jpg" alt="" width="248" height="299" style=" float:left; border:6px solid #FEB97A; margin-top:-15px;position:relative; z-index:99999;"/>
+</a>
+<a href="http://yw0511.com/category.php?id=79">
+<img src="../images/index05.jpg" alt="" width="780"/>
+</a>
+<a href="/article_cat.php?id=22"><img src="../images/mx02.gif" alt="" width="782"  style=" margin-top:5px;"/></a>
+ 
 <div class="welcome_xlm">
-	
-  
 <div class="welcome_content"><img src="../images/cenuo.jpg" width="782" height="102" alt="承诺"></div>
 </div>
 <div>

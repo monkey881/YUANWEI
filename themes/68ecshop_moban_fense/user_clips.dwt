@@ -10,12 +10,12 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{insert_scripts files='jquery-1.10.2.min.js,json2.js'}
 <style>
-a:link{text-decoration: none; color:#333;}
 a:hover{ color:#999;}
 </style>
 {* 包含脚本文件 *}
-{insert_scripts files='transport.js,common.js,user.js,index.js'}
+{insert_scripts files='common.js,user.js,index.js'}
 </head>
 <body>
 <!-- #BeginLibraryItem "/library/page_header2.lbi" --><!-- #EndLibraryItem -->
@@ -47,51 +47,38 @@ a:hover{ color:#999;}
          <!-- *用户中心默认显示页面 start-->
          <!-- {if $action eq 'default'} -->
          
-         <table width="98%" border="0" cellspacing="5" cellpadding="0">
+         <table width="100%" border="0" cellspacing="5" cellpadding="0">
   <tr>
-    <td width="150" rowspan="4" valign="top"><img src="{$info.userpic}" width="150" height="150" alt="" /></td>
-    <td  valign="top"> <font class="f5"><b class="f4">{$info.username}</b> {$lang.welcome_to} {$info.shop_name}！</font><br />
-          <div class="blank"></div>
-          {$lang.last_time}: {$info.last_time}<br />
-          <div class="blank5"></div>
-          {$rank_name}  <font color="red">{$next_rank_name}</font><br />
-          <div class="blank5"></div>
+    <td width="120" rowspan="4" style="vertical-align:top;text-align:left;"><img src="{$info.userpic}" width="100" height="100" alt="" /></td>
+    <td  valign="top"><div style="padding-bottom:8px;font-weight:bold;">{$lang.welcome_to}&nbsp;{$info.username}</div>
+          <div style="padding-bottom:5px;"><span class="label-r">{$rank_name}：{$next_rank_name}</span><span class="label-r">{$lang.last_time}：{$info.last_time}</span></div>
+          <div style="padding-bottom:5px;"><span class="label-r">{$lang.your_surplus}：<a href="user.php?act=account_log" class="money">{$info.surplus}</a></span>
+          <!-- {if $info.credit_line gt 0} 如果有信用额度 -->
+           <span class="label-r">{$lang.credit_line}：{$info.formated_credit_line}</span>
+          <!-- {/if} -->
+           <span class="label-r">{$lang.your_bonus}:<a href="user.php?act=bonus" class="money">{$info.bonus}</a></span>
+           <span class="label-r">{$lang.your_integral}:<span class="money">{$info.integral}</span></span>
+		   </div>
            <!--{if $info.is_validate eq 0} -->
-          {$lang.not_validated} <a href="javascript:sendHashMail()" >【 {$lang.resend_hash_mail} 】</a><br />
+          {$lang.not_validated} <a href="javascript:sendHashMail()" >【 {$lang.resend_hash_mail} 】</a>
            <!--{/if} --></td>
   </tr>
   <tr>
-    <td >订单提醒：<a href="user.php?act=order_list&status=dpj"><font color="#FF0000" style="font-weight:bold">待评价订单({$order_number})</font></a></td>
+    <td>
+		<a href="user.php?act=order_list&status=dpj" class="mx-userinfo-blink">待评价订单({$un_order_number})</a>
+		<a href="user.php?act=order_list&status=dpj" class="mx-userinfo-blink">待处理订单(0)</a>
+		<a href="user.php?act=order_list&status=dpj" class="mx-userinfo-blink">待支付订单(0)</a>
+	</td>
   </tr>
-  <tr>
-    <td >待设配送：{$daipeisong.tid}
-    <!--{foreach from=$daipeisong item=item}-->
-   <a href="user.php?act=rili&tid={$item.tid}">{$item.taocan_name}({$item.date})</a>
-   <!-- {/foreach}-->
-    </td>
-  </tr>
-  
 </table>
 
-         
-           
+        <script>
+        /**
           <div style="margin:5px 0; border:1px solid #0CF;padding:10px 20px; background-color:#F93; ">
            <img src="images/note.gif" alt="note" />&nbsp;<font style="color:#FFF; font-size:14px;">{$user_notice}</font>
          </div>
-     
-          <div class="f_l" style="width:350px; float:left; background-color: #f3f3f3;border: 1px solid #d0cece; height: 100px;">
-          <div style="width: 350px;height: 26px;line-height: 26px;background-color: #f3f3f3;font-weight:bold;">&nbsp;{$lang.your_account}</div>
-          <div class="blank"></div>
-          <div style=" margin-left: 10px;">
-           {$lang.your_surplus}:<a href="user.php?act=account_log" >{$info.surplus}</a><br />
-          <!-- {if $info.credit_line gt 0} 如果有信用额度 -->
-           {$lang.credit_line}:{$info.formated_credit_line}<br />
-          <!-- {/if} -->
-           {$lang.your_bonus}:<a href="user.php?act=bonus">{$info.bonus}</a><br />
-           {$lang.your_integral}:{$info.integral}<br />
-           </div>
-          </div>
-          
+		
+		
           <div class="f_r" style="width:350px; float:right; background-color: #f3f3f3;border: 1px solid #d0cece; height:100px;">
           <div style="width: 350px;height: 26px;line-height: 26px;background-color: #f3f3f3;font-weight:bold;">&nbsp;{$lang.your_notice}</div>
           <div class="blank"></div>
@@ -108,34 +95,43 @@ a:hover{ color:#999;}
           <!-- {/if}-->
           </div>
           </div>
+		  **/
+		</script>
           <div class="clear"></div>
           <style type="text/css">
+		  strong{font-weight:normal;}
 .centerPadd {
   overflow: hidden;
-  padding: 5px 8px 8px;
+  padding: 5px 0px 8px 8px;
 }
 .itemTit {
   background: url("images/bg.gif") no-repeat scroll 0 -195px transparent;
   height: 30px;
   text-align: right;
+  position:relative;
+  z-index:1;
 }
 .itemTit .h2bg {
-  background: none repeat scroll 0 0 transparent;
+  background: none;
   border: medium none;
-  color: #006ACE;
+  color: #333;
   display: inline;
   font-size: 12px;
   font-weight: 100;
-  height: 27px;
+  height: 28px;
   line-height: 28px;
   padding: 0 10px;
   text-align: center;
   white-space: nowrap;
 }
 .itemTit .h2bg a {
-  color: #FF9933;
+  color: #000;
   text-decoration: none;
 }
+h2 a:link {
+  text-decoration: none;
+}
+
 
 .goodsItem {
   float: left;
@@ -165,38 +161,36 @@ a:hover{ color:#999;}
   text-align: left;
 }
 .itemTit h2 {
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
-  background: url("images/itemH2Bg.gif") repeat-x scroll left top transparent;
-  border-color: #D6ECFF #D6ECFF -moz-use-text-color;
-  border-image: none;
-  border-style: solid solid none;
-  border-width: 1px 1px medium;
-  bottom: -3px;
-  color: #3F3F3F;
-  display: inline;
+  background-color: #fff;
+  border:1px solid #c1c1c1;
+  border-bottom:none;
+  border-top-width:2px;
+  border-top-color:#e36004;
+  color: #111;
+  display: block;
   float: left;
   font-size: 12px;
-  font-weight: 100;
   height: 27px;
-  line-height: 28px;
-  margin: 0 6px 0 0;
-  padding: 0 10px;
-  position: relative;
+  line-height: 27px;
+  margin: 0px 6px 0px 0px;
+  padding: 0px 10px 1px 10px;
   text-align: center;
   white-space: nowrap;
 }
+.goodsBox{
+	border-top:solid 1px #c1c1c1;
+	position:relative;
+	top:-1px;
+}
 </style>
-          <div class="user_shop">
+<div class="user_shop" style="margin-top:30px;">
 <div class="box_2 centerPadd">
   <div id="itemBest" class="itemTit">
             <h2 class=""><a onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(4, 66);" href="javascript:void(0)">新品上市</a></h2>
             <h2 class="h2bg"><a onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(4, 67)" href="javascript:void(0)">今日推荐</a></h2>
             <h2 class="h2bg"><a onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(4, 68)" href="javascript:void(0)">猜你喜欢</a></h2>
-            <h2 class="h2bg"><a onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(5, 12)" href="javascript:void(0)">今日团购</a></h2>
-            <h2 class="h2bg"><a onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, 15)" href="javascript:void(0)">今日秒杀</a></h2>
+            <!--<h2 class="h2bg"><a onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(5, 12)" href="javascript:void(0)">今日团购</a></h2>
+            <h2 class="h2bg"><a onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, 15)" href="javascript:void(0)">今日秒杀</a></h2>-->
               </div>
   <div class="clearfix goodsBox" id="show_best_area">    
     
@@ -205,7 +199,18 @@ a:hover{ color:#999;}
   <script type="text/javascript">
 get_cat_recommend(4, 66);
 </script>
-
+</div>
+</div>
+<div class="user_shop" style="margin-top:30px;margin-bottom:30px;overflow:hidden;">
+<div class="box_2 centerPadd">
+  <div id="itemBest" class="itemTit">
+            <h2 class=""><a>待设配送{$daipeisong.tid}</a></h2>
+              </div>
+  <div class="clearfix goodsBox" style="overflow:hidden;margin-right:-4px;">    
+    <!--{foreach from=$daipeisong item=item}-->
+   <a style="display:block;line-height:24px;margin:8px 4px 0px 0px;float:left;padding:4px;text-align:center;height:24px;width:177px;background-color:#f9f9f9;border:dashed 1px #f1f1f1;" href="user.php?act=rili&tid={$item.tid}">{$item.taocan_name}({$item.date})</a>
+   <!-- {/foreach}-->
+  </div>
 </div>
 </div>
           
@@ -214,7 +219,7 @@ get_cat_recommend(4, 66);
          <!-- #用户中心默认显示页面 end-->
          <!-- *我的留言 start-->
          <!-- {if $action eq 'message_list'} -->
-          <h5><span>{$lang.label_message}</span></h5>
+		  <div class="mx-bar hasb"><span>{$lang.label_message}</span></div>
           <div class="blank"></div>
            <!--{foreach from=$message_list item=message key=key} -->
           <div class="f_l">
@@ -300,7 +305,7 @@ get_cat_recommend(4, 66);
          <!--#我的留言 end-->
          <!-- *我的评论 start-->
           <!-- {if $action eq 'comment_list'} -->
-          <h5><span>{$lang.label_comment}</span></h5>
+		  <div class="mx-bar hasb"><span>{$lang.label_comment}</span></div>
           <div class="blank"></div>
           <!--{foreach from=$comment_list item=comment} -->
           <div class="commentsTit">
@@ -330,7 +335,7 @@ get_cat_recommend(4, 66);
     <!--#我的评论 end-->
     <!--#我的标签 start-->
     <!--{if $action eq 'tag_list'} -->
-    <h5><span>{$lang.label_tag}</span></h5>
+	<div class="mx-bar hasb"><span>{$lang.label_tag}</span></div>
     <div class="blank"></div>
      <!-- {if $tags} -->
     <!-- 标签云开始 {foreach from=$tags item=tag}-->
@@ -343,8 +348,8 @@ get_cat_recommend(4, 66);
     <!--#我的标签 end-->
     <!--*收藏商品列表页面 start-->
     <!--{if $action eq 'collection_list'} -->
-  {insert_scripts files='transport.js,utils.js'}
-    <h5><span>{$lang.label_collection}</span></h5>
+  {insert_scripts files='utils.js'}
+	<div class="mx-bar hasb"><span>{$lang.label_collection}</span></div>
     <div class="blank"></div>
      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
       <tr align="center">
@@ -373,8 +378,7 @@ get_cat_recommend(4, 66);
     </table>
     <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
      <div class="blank5"></div>
-
-    <h5><span>{$lang.label_affiliate}</span></h5>
+	<div class="mx-bar hasb"><span>{$lang.label_affiliate}</span></div>
     <div class="blank"></div>
      <form name="theForm" method="post" action="">
      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
@@ -409,7 +413,7 @@ get_cat_recommend(4, 66);
       </select></td>
     </tr>
     <tr>
-      <td colspan="2" align="center" bgcolor="#ffffff"><input type="button" name="gen_code" value="{$lang.generate}" onclick="genCode()" class="bnt_blue_1" />
+      <td colspan="2" align="center" bgcolor="#ffffff"><input type="button" name="gen_code" value="{$lang.generate}" onclick="genCode()" class="mx-btn s1" />
 			</td>
   </tr>
     <tr>
@@ -472,7 +476,7 @@ get_cat_recommend(4, 66);
     <!--#收藏商品列表页面 end-->
     <!--*缺货登记列表页面 start-->
     <!--{if $action eq 'booking_list'} -->
-    <h5><span>{$lang.label_booking}</span></h5>
+	<div class="mx-bar hasb"><span>{$lang.label_booking}</span></div>
     <div class="blank"></div>
      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
       <tr align="center">
@@ -502,7 +506,7 @@ get_cat_recommend(4, 66);
     var {$key} = "{$item}";
     {/foreach}
     </script>
-    <h5><span>{$lang.add}{$lang.label_booking}</span></h5>
+	<div class="mx-bar hasb"><span>{$lang.add}{$lang.label_booking}</span></div>
     <div class="blank"></div>
      <form action="user.php" method="post" name="formBooking" onsubmit="return addBooking();">
      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
@@ -548,13 +552,13 @@ get_cat_recommend(4, 66);
     <!-- {if $affiliate.on eq 1} -->
      <!-- {if $action eq 'affiliate'} -->
       <!-- {if !$goodsid || $goodsid eq 0} -->
-      <h5><span>{$lang.affiliate_detail}</span></h5>
+	  <div class="mx-bar hasb"><span>{$lang.affiliate_detail}</span></div>
       <div class="blank"></div>
      {$affiliate_intro}
     <!-- {if $affiliate.config.separate_by eq 0} -->
     <!-- 下线人数、分成 -->
-    <div class="blank"></div>
-    <h5><span><a name="myrecommend">{$lang.affiliate_member}</a></span></h5>
+    <div class="blank"></div>>
+	<div class="mx-bar hasb"><span><a name="myrecommend">{$lang.affiliate_member}</a></span></div>
     <div class="blank"></div>
    <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
     <tr align="center">
@@ -579,7 +583,7 @@ get_cat_recommend(4, 66);
 <!-- {/if} -->
 <!-- 我的推荐清单 -->
 <div class="blank"></div>
-<h5><span>分成规则</span></h5>
+<div class="mx-bar hasb"><span>分成规则</span></div>
 <div class="blank"></div>
 <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
     <tr align="center">
@@ -628,7 +632,7 @@ function selectPage(sel)
 </script>
 <!-- /我的推荐清单 -->
 <div class="blank"></div>
-<h5><span>{$lang.affiliate_code}</span></h5>
+<div class="mx-bar hasb"><span>{$lang.affiliate_code}</span></div>
 <div class="blank"></div>
 <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
 <tr>
@@ -654,7 +658,7 @@ function selectPage(sel)
         <style type="text/css">
         .types a{ text-decoration:none; color:#333;}
         </style>
-    <h5><span>{$lang.affiliate_code}</span></h5>
+	<div class="mx-bar hasb"><span>{$lang.affiliate_code}</span></div>
     <div class="blank"></div>
   <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
     <tr align="center">

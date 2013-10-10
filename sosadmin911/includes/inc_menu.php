@@ -3,11 +3,11 @@
 /**
  * ECSHOP 管理中心菜单数组
  * ============================================================================
- * * 版权所有 2005-2012 上海商派网络科技有限公司，并保留所有权利。
- * 网站地址: http://www.ecshop.com；
+ * * 版权所�?2005-2012 上海商派网络科技有限公司，并保留所有权利�?
+ * 网站地址: http://www.ecshop.com�?
  * ----------------------------------------------------------------------------
- * 这不是一个自由软件！您只能在不用于商业目的的前提下对程序代码进行修改和
- * 使用；不允许对程序代码以任何形式任何目的的再发布。
+ * 这不是一个自由软件！您只能在不用于商业目的的前提下对程序代码进行修改�?
+ * 使用；不允许对程序代码以任何形式任何目的的再发布�?
  * ============================================================================
  * $Author: liubo $
  * $Id: inc_menu.php 17217 2011-01-19 06:29:08Z liubo $
@@ -24,7 +24,7 @@ $modules['02_cat_and_goods']['03_category_list']    = 'category.php?act=list';
 $modules['02_cat_and_goods']['05_comment_manage']   = 'comment_manage.php?act=list';
 $modules['02_cat_and_goods']['06_goods_brand_list'] = 'brand.php?act=list';
 $modules['02_cat_and_goods']['08_goods_type']       = 'goods_type.php?act=manage';
-$modules['02_cat_and_goods']['11_goods_trash']      = 'goods.php?act=trash';        // 商品回收站
+$modules['02_cat_and_goods']['11_goods_trash']      = 'goods.php?act=trash';        // 商品回收�?
 $modules['02_cat_and_goods']['12_batch_pic']        = 'picture_batch.php';
 $modules['02_cat_and_goods']['13_batch_add']        = 'goods_batch.php?act=add';    // 商品批量上传
 $modules['02_cat_and_goods']['14_goods_export']     = 'goods_export.php?act=goods_export';
@@ -41,7 +41,6 @@ $modules['taocan_manger']['taocan_add']          = 'goods.php?act=add';
 $modules['taocan_manger']['taocan_list']          = 'goods.php?act=list&is_taocan=1';
 $modules['taocan_manger']['taocan_order']          = 'taocan_order.php?act=list';
 $modules['taocan_manger']['taocan_peisong']          = 'peisong.php';
-$modules['taocan_manger']['taocan_test']          = 'taocan_order.php?act=test';
 
 
 $modules['03_promotion']['02_snatch_list']          = 'snatch.php?act=list';
@@ -70,6 +69,9 @@ $modules['04_order']['10_back_order']               = 'order.php?act=back_list';
 
 $modules['05_banner']['ad_position']                = 'ad_position.php?act=list';
 $modules['05_banner']['ad_list']                    = 'ads.php?act=list';
+//���ο��� ������ҳdoodle
+//$modules['05_banner']['doodle']						= 'doodles.php';
+$modules['05_banner']['zhaomu']						= 'zhaomu.php';
 
 $modules['06_stats']['flow_stats']                  = 'flow_stats.php?act=view';
 $modules['06_stats']['searchengine_stats']          = 'searchengine_stats.php?act=view';
@@ -102,7 +104,7 @@ $modules['10_priv_admin']['admin_logs']             = 'admin_logs.php?act=list';
 $modules['10_priv_admin']['admin_list']             = 'privilege.php?act=list';
 $modules['10_priv_admin']['admin_role']             = 'role.php?act=list';
 $modules['10_priv_admin']['agency_list']            = 'agency.php?act=list';
-$modules['10_priv_admin']['suppliers_list']         = 'suppliers.php?act=list'; // 供货商
+$modules['10_priv_admin']['suppliers_list']         = 'suppliers.php?act=list'; // 供货�?
 
 $modules['11_system']['01_shop_config']             = 'shop_config.php?act=list_edit';
 $modules['11_system']['shop_authorized']             = 'license.php?act=list_edit';
@@ -152,4 +154,8 @@ $modules['16_email_manage']['email_list']           = 'email_list.php?act=list';
 $modules['16_email_manage']['magazine_list']        = 'magazine_list.php?act=list';
 $modules['16_email_manage']['attention_list']       = 'attention_list.php?act=list';
 $modules['16_email_manage']['view_sendlist']        = 'view_sendlist.php?act=list';
+//������ҳ�Զ���õ�Ƭ����
+$modules['18_huandengpian']['1_huandengpian']              ='huandengpian.php';
+$modules['19_award']['1_user_award']              ='award_post.php';
+$modules['20_vote']['1_user_vote']                ='voteadmin.php';
 ?>

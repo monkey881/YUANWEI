@@ -98,7 +98,7 @@ div.cateranking_title {
             <b style=" font-size:14px;color:#F60;">{$hy.shop_price}</b><br />
             <!--{/if}--><span class="zeikomiBaika"><span style=" font-weight:bold">{$hy.goods_weight}</span>千克</span> </div>
 {if $smarty.session.user_id gt 0}
-          <div style="text-align:right;"><a onclick="getmousepos(event)" href="{if $cat_id==71}{if @$usercookie==1}javascript:addToCart({$hy.goods_id}){else}user_award.php{/if}{else}javascript:addToCart({$hy.goods_id}){/if}" title="">
+          <div style="text-align:right;"><a onclick="getmousepos(event)" href="{if $cat_id==71}{if @$usercookie==1}javascript:addToCart({$key}){else}user_award.php{/if}{else}javascript:addToCart({$key}){/if}" title="">
             <img src="../images/cart111.gif" width="85" height="35" alt="添加到购物车"> </a>
           </div>
           {else}

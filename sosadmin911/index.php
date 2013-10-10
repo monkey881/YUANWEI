@@ -72,6 +72,7 @@ elseif ($_REQUEST['act'] == 'calculator')
 elseif ($_REQUEST['act'] == 'menu')
 {
     include_once('includes/inc_menu.php');
+
 // 权限对照表
     include_once('includes/inc_priv.php');
 

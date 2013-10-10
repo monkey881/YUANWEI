@@ -17,6 +17,7 @@
 <link href="{$cat_style}" rel="stylesheet" type="text/css" />
 <!-- {/if} -->
 {* 包含脚本文件 *}
+{insert_scripts files='jquery-1.10.2.min.js,json2.js'}
 {insert_scripts files='common.js,compare.js'}
 <script type="text/javascript" src="js/action.js">
   var count = 0;//全局判断刷新的计数器
@@ -37,8 +38,6 @@
     <h1 style="background:url(images/g_tit.gif) left center no-repeat; height:26px;">
     <span style="margin-top:7px; display:block; margin-left:18px; color:#333; line-height:30px">{$lang.goods_filter}</span>
     </h1>
-    
-    
     <div class="mod1 blank" id="filter" style="border-top:none;">
       <div class="mod1con"> 
         <!--{if $brands.1}-->
@@ -83,7 +82,7 @@
       </div>
     </div>
     <div id="hidden_area" style="top: 159px; left: 434px; z-index:1000; display:none;"> </div>
-    <script type="text/javascript">divheight("filter");</script> 
+    <script type="text/javascript">//divheight("filter");</script> 
     <!-- {/if} --> 
     <!-- TemplateBeginEditable name="商品列表上可编辑区域" --> 
 	<!-- TemplateEndEditable -->
@@ -126,9 +125,14 @@ $$(window).scroll(loadData);
 function loadData(){
 	if(isUserAtBottom()){
 		if($$(".imgbox").size()<= $$("#pager b").text()){//有可以载入的内容!
-		var url=$$("#page_hidden").text();
-		//alert(url);
-		Ajax.call(url,'',getResult,'GET','JSON');
+			var url=$$("#page_hidden").text();
+			//alert(url);
+			$.ajax({
+				url:url,
+				success:getResult,
+				type:'GET',
+				dataType:'json'
+			});
 		}
 		
 	}

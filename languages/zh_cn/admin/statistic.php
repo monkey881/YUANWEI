@@ -136,7 +136,7 @@ $_LANG['visit_buy'] = '访问购买率';
 $_LANG['download_visit_buy'] = '下载访问购买率报表';
 
 $_LANG['goods_cat'] = '商品分类';
-$_LANG['goods_brand'] = '商品品牌';
+$_LANG['goods_brand'] = '农民';
 
 /* 搜索引擎 */
 $_LANG['down_search_stats'] = '下载搜索关键字报表';

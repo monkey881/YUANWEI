@@ -37,7 +37,7 @@ array('login','act_login','register','act_register','act_edit_password','get_pas
 /* 显示页面的action列表 */
 $ui_arr = array('register', 'login', 'profile', 'order_list', 'order_detail', 'address_list', 'collection_list',
 'message_list', 'tag_list', 'get_password', 'reset_password', 'booking_list', 'add_booking', 'account_raply',
-'account_deposit', 'account_log', 'account_detail', 'act_account', 'pay', 'default', 'bonus', 'group_buy', 'group_buy_detail', 'affiliate', 'comment_list','validate_email','track_packages', 'transform_points','qpassword_name', 'get_passwd_question', 'check_answer','taocan','rili','stop_taocan','start_taocan','good_food','good_food_add','good_food_edit','vote');
+'account_deposit', 'account_log', 'account_detail', 'act_account', 'pay', 'default', 'bonus', 'group_buy', 'group_buy_detail', 'affiliate', 'comment_list','validate_email','track_packages', 'transform_points','qpassword_name', 'get_passwd_question', 'check_answer','taocan','rili','stop_taocan','start_taocan','good_food','good_food_add','good_food_edit','vote','ka');
 /* 未登录处理 */
 if (empty($_SESSION['user_id']) && empty($_SESSION['admin_name']))
 {
@@ -106,6 +106,7 @@ if ($action == 'default')
         }
     }
 	$order_number=$GLOBALS['db']->getone("SELECT COUNT(*) FROM ". $GLOBALS['ecs']->table('order_info') ." WHERE order_status=5 AND user_id=$user_id") ;
+    $un_order_number=$GLOBALS['db']->getone("SELECT COUNT(*) FROM ". $GLOBALS['ecs']->table('order_info') ." WHERE is_comment=0 AND user_id=$user_id") ;
 	
 	$taocan=$GLOBALS['db']->getAll("SELECT * FROM ". $GLOBALS['ecs']->table('order_taocan') ." WHERE status=2 AND user_id=$user_id") ;
 	$cal = new Calendar();
@@ -128,6 +129,7 @@ if ($action == 'default')
     $smarty->assign('user_notice', $_CFG['user_notice']);
     $smarty->assign('prompt',      get_user_prompt($user_id));
 	$smarty->assign('order_number',     $order_number);
+    $smarty->assign('un_order_number',     $un_order_number);
 	$smarty->assign('daipeisong',     $arr_dps);
     $smarty->display('user_clips.dwt');
 }
@@ -1405,23 +1407,85 @@ elseif ($action == 'act_del_booking')
     }
 }
 
-/* 确认收货 */
-elseif ($action == 'affirm_received')
-{
-    include_once(ROOT_PATH . 'includes/lib_transaction.php');
-
-    $order_id = isset($_GET['order_id']) ? intval($_GET['order_id']) : 0;
-
-    if (affirm_received($order_id, $user_id))
-    {
-        ecs_header("Location: user.php?act=order_list\n");
-        exit;
-    }
-    else
-    {
-        $err->show($_LANG['order_list_lnk'], 'user.php?act=order_list');
-    }
-}
+/* 确认收货 */  
+elseif ($action == 'affirm_received')  
+{  
+    include_once(ROOT_PATH . 'includes/lib_transaction.php');  
+  
+    $order_id = isset($_GET['order_id']) ? intval($_GET['order_id']) : 0;  
+  
+    if (affirm_received($order_id, $user_id))  
+    {  
+        //ecs_header("Location: user.php?act=order_list\n");  
+        ecs_header("Location: user.php?act=order_comment&order_id=$order_id\n");  
+        exit;  
+    }  
+    else  
+    {  
+        $err->show($_LANG['order_list_lnk'], 'user.php?act=order_list');  
+    }  
+}  
+  
+//用户确认收货评论  
+elseif($action=="order_comment")  
+{  
+    $order_id = isset($_GET['order_id']) ? intval($_GET['order_id']) : 0;  
+    include_once(ROOT_PATH . 'includes/lib_order.php');  
+    $order_info=order_info($order_id);  
+    if($order_info['is_comment'])  
+    {  
+        ecs_header("Location: user.php?act=order_list\n");       
+        exit;             
+    }  
+    /* 订单商品 */  
+    $goods_list = order_goods($order_id);  
+    $smarty->assign('order_id',$order_id);  
+    $smarty->assign('goods_list',$goods_list);  
+    $smarty->display('order_comment.dwt');     
+}  
+//保存用户评价  
+elseif($action=="save_comment")  
+{  
+    include_once(ROOT_PATH . 'includes/lib_order.php');  
+    /* 评论是否需要审核 */  
+    $status = 1 - $GLOBALS['_CFG']['comment_check'];  
+  
+    $user_id =$_SESSION['user_id'];  
+    $email = $_SESSION['email'];  
+    $user_name = $_SESSION['user_name'] ;  
+    $email = htmlspecialchars($email);  
+    $user_name = htmlspecialchars($user_name);  
+    $goods_list=$_POST['goods'];  
+    
+    foreach ($goods_list as $key=>$val)  
+     {  
+        /* 保存评论内容 */  
+        $sql = "INSERT INTO " .$GLOBALS['ecs']->table('comment') .  
+               "(comment_type, id_value, email, user_name, content, comment_rank, add_time, ip_address, status, parent_id, user_id) VALUES " .  
+               "('0', '" .$val['goods_id']. "', '$email', '$user_name', '" .$val['content']."', '".$val['comment_rank']."', ".gmtime().", '".real_ip()."', '$status', '0', '$user_id')";  
+        
+       $result = $GLOBALS['db']->query($sql);      
+    }  
+      
+   
+     
+    $order_info=order_info($_REQUEST['order_id']);  
+    if(!$order_info['is_comment'])  
+    {  
+        //修改订单的信息  
+        update_order($_REQUEST['order_id'],array('is_comment'=>1));        
+        $pay_point=$order_info['money_paid']-$order_info['shipping_fee'];  
+         //送积分  
+        if($pay_point)  
+        {  
+         log_account_change($user_id,0,0,0,$pay_point,'用户评论订单'.$order_info['order_sn'].'赠送消费积分');  
+        }     
+    }  
+    clear_cache_files('comments_list.lbi');  
+    ecs_header("Location: user.php?act=order_list\n");  
+    //print_r($_POST);  
+    exit;     
+}  
 
 /* 会员退款申请界面 */
 elseif ($action == 'account_raply')
@@ -3095,6 +3159,30 @@ elseif ($action == 'clear_history')
 elseif ($action == 'vote')
 {
 	$smarty->display('vote.dwt');
+}
+elseif ($action == 'ka')
+{
+    
+   
+    $smarty->display('user_taocan.dwt');
+}
+elseif ($action == 'kasave')
+{
+    $kahao=$_POST['kahao'];
+	$password=$_POST['password'];
+    $sql = "SELECT * FROM " . $ecs->table('taocan_ka')  . " WHERE user_id='$user_id' and kahao=$kahao and password=$password";
+    $row = $db->getRow($sql);
+   
+   if($row['status']==0){
+	   show_message('套餐购买成功', '管理套餐', 'user.php?act=taocan');
+   }
+   elseif($row['status']==1){
+	   show_message('此卡已使用，请更换其他卡再试', '重试', 'user.php?act=taocan');
+   }
+   else{
+	   show_message('卡号或密码不正确，请核对后再试', '重试', 'user.php?act=ka');
+   }
+   
 }
 /**
  * 生成编辑器

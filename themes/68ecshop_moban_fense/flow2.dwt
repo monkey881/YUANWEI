@@ -12,18 +12,25 @@
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
 {* 包含脚本文件 *}
+{insert_scripts files='jquery-1.10.2.min.js,json2.js'}
 {insert_scripts files='common.js,shopping_flow.js'}
 <script type="text/javascript" src="js/action.js"></script>
 <script type="text/javascript">
 function add_num(rec_id,goods_id){
-    if(goods_id >=48 && goods_id<=55){
-        alert("套餐只能选择一份！");
-        return ;
-    }
-    document.getElementById("goods_number_"+rec_id).value++;
-    var number = document.getElementById("goods_number_"+rec_id).value;
-    Ajax.call('flow.php','step=update_group_cart&rec_id='+rec_id+'&number='+number+'&goods_id='+goods_id, changePriceResult,'GET','JSON');
-    }
+		if(goods_id >=48 && goods_id<=55){
+			alert("套餐只能选择一份！");
+			return ;
+		}
+		document.getElementById("goods_number_"+rec_id).value++;
+		var number = document.getElementById("goods_number_"+rec_id).value;
+		$.ajax({
+			url:'flow.php',
+			data:{step:'update_group_cart',rec_id:rec_id,number:number,goods_id:goods_id},
+			success:changePriceResult,
+			type:'GET',
+			dataType:'json'
+		});
+	}
 function red_num(rec_id,goods_id){
     if(goods_id >=48 && goods_id<=55){
         alert("套餐只能选择一份！");
@@ -33,7 +40,13 @@ function red_num(rec_id,goods_id){
         document.getElementById("goods_number_"+rec_id).value--;
     }
     var number = document.getElementById("goods_number_"+rec_id).value;
-    Ajax.call('flow.php','step=update_group_cart&rec_id='+rec_id+'&number='+number+'&goods_id='+goods_id, changePriceResult,'GET','JSON');
+    $.ajax({
+		url:'flow.php',
+		data:{step:'update_group_cart',rec_id:rec_id,number:number,goods_id:goods_id},
+		success:changePriceResult,
+		type:'GET',
+		dataType:'json'
+	});
     
 }
 function change_price(rec_id,goods_id){
@@ -42,7 +55,13 @@ function change_price(rec_id,goods_id){
         return ;
     }
     var number = document.getElementById("goods_number_"+rec_id).value;
-    Ajax.call('flow.php','step=update_group_cart&rec_id='+rec_id+'&number='+number+'&goods_id='+goods_id, changePriceResult,'GET','JSON');
+    $.ajax({
+		url:'flow.php',
+		data:{step:'update_group_cart',rec_id:rec_id,number:number,goods_id:goods_id},
+		success:changePriceResult,
+		type:'GET',
+		dataType:'json'
+	});
 }
 function changePriceResult(result){
 if(result.error == 1){
@@ -176,7 +195,6 @@ if(result.error == 1){
     </table>
     
  <!-- {if $smarty.session.user_id gt 0} -->
- {insert_scripts files='transport.js'}
  <script type="text/javascript" charset="utf-8">
     function collect_to_flow(goodsId)
     {
@@ -188,7 +206,13 @@ if(result.error == 1){
         goods.goods_id = goodsId;
         goods.number   = number;
         goods.parent   = 0;
-        Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), collect_to_flow_response, 'POST', 'JSON');
+		$.ajax({
+			url:'flow.php?step=add_to_cart',
+			data:{goods:JSON.stringify(goods)},
+			success:collect_to_flow_response,
+			type:'POST',
+			dataType:'json'
+		});
     }
     function collect_to_flow_response(result)
         {
@@ -235,7 +259,6 @@ if(result.error == 1){
 
 
 <!-- {if $fittings_list} 商品配件 -->
-{insert_scripts files='transport.js'}
   <script type="text/javascript" charset="utf-8">
   function fittings_to_flow(goodsId,parentId)
   {
@@ -246,7 +269,13 @@ if(result.error == 1){
     goods.goods_id = goodsId;
     goods.number   = number;
     goods.parent   = parentId;
-    Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), fittings_to_flow_response, 'POST', 'JSON');
+    $.ajax({
+		url:'flow.php?step=add_to_cart',
+		data:{goods:JSON.stringify(goods)},
+		success:collect_to_flow_response,
+		type:'POST',
+		dataType:'json'
+	});
   }
     function fittings_to_flow_response(result)
   {

@@ -1,5 +1,5 @@
 ﻿<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<div style="background-image: url(images/category.jpg); height:26px;"><span style=" margin-left: 10px;  font-size:16px; color:white; padding-top:5px; font-weight:bold; line-height:25px;">我的原味生活</span></div>
+<div style="background-image: url(images/category.jpg); height:26px;"><span style=" margin-left: 40px;  font-size:16px; color:white; padding-top:5px; font-weight:bold; line-height:25px;">我的原味生活</span></div>
 <div class="userMenu">
 
  <li onmouseover="this.style.background='#F96'" onmouseout="this.style.background=''" ><a href="user.php" {if $action eq 'default'}class="curs"{/if}> {$lang.label_welcome}</a> </li>

@@ -10,32 +10,15 @@
 <!-- TemplateEndEditable -->
 <!-- TemplateBeginEditable name="head" -->
 <!-- TemplateEndEditable -->
-
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
 <link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
-<script type="text/javascript" src="js/fancybox/lib/jquery-1.9.0.min.js"></script>
-
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/js/json2.js"></script>
 <script type="text/javascript" src="js/fancybox/source/jquery.fancybox.js?v=2.1.4"></script>
-<link href="js/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-			 *  Simple image gallery. Uses default settings
-			 */
-
-			$('#fancybox.ajax').fancybox();
-
-			/*
-			 *  Different effects
-			 */
-
-		
-
-		});
-	</script>
 {* 包含脚本文件 *}
+{insert_scripts files='jquery-1.10.2.min.js,json2.js'}
 {insert_scripts files='common.js,index.js'}
 <script type="text/javascript" src="js/action.js"></script>
 <script type="text/javascript" src="js/scrollpic.js"></script>
@@ -43,6 +26,7 @@
 </head>
 <body>
 <!-- #BeginLibraryItem "/library/page_header2.lbi" --><!-- #EndLibraryItem -->
+<div class="mx-hr-top"></div>
 <div class="block clearfix">
   <div id="pageLeft" class="fl">
   
@@ -70,8 +54,6 @@
 <div class="blank"></div>
 <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
 <!--{if $img_links  or $txt_links }-->
-
-<script type="text/javascript">divheight("links");</script>	
 </div> 
 <!--{/if}-->
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->

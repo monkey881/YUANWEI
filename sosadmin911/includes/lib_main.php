@@ -312,16 +312,23 @@ function create_html_editor($input_name, $input_value = '')
 {
     global $smarty;
 
-    $editor = new FCKeditor($input_name);
-    $editor->BasePath   = '../includes/fckeditor/';
-    $editor->ToolbarSet = 'Normal';
-    $editor->Width      = '100%';
-    $editor->Height     = '320';
-    $editor->Value      = $input_value;
-    $FCKeditor = $editor->CreateHtml();
-    $smarty->assign('FCKeditor', $FCKeditor);
+    $kindeditor="<script charset='utf-8' src='../includes/kindeditor/kindeditor-min.js'></script>
+    <script>
+        var editor;
+            KindEditor.ready(function(K) {
+                editor = K.create('textarea[name=\"$input_name\"]', {
+                    allowFileManager : true,
+                    width : '100%100',
+                    height: '300px',
+                    resizeType: 0   //固定宽高
+                });
+            });
+    </script>
+    <textarea id=\"$input_name\" name=\"$input_name\" style='width:700px;height:300px;'>$input_value</textarea>
+ <input type=\"submit\" value=\"提交\" />
+    ";
+    $smarty->assign('FCKeditor', $kindeditor);
 }
-
 /**
  * 取得商品列表：用于把商品添加到组合、关联类、赠品类
  * @param   object  $filters    过滤条件

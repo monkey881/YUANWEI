@@ -62,6 +62,12 @@
           
             </td>
           </tr>
+           <tr>
+            <td class="label">运费</td>
+            <td><input type="text" name="yunfei" id="yunfei" class="text" size="10" value="{$goods.yunfei}"/> 元
+          
+            </td>
+          </tr>
           <tr>
             <td class="label">{$lang.lab_goods_cat}</td>
             <td><select name="cat_id" onchange="hideCatDiv()" ><option value="0">{$lang.select_please}</option>{$cat_list}</select>
@@ -106,7 +112,9 @@
           <select name="biaozhun" id="biaozhun">
             <option>0农药有机肥</option>
             <option>原味菌菇</option>
+            <option>原味葡萄</option>
             <option>原味蛋</option> 
+            <option>原味梨</option>
             <option>暂无标准</option>
           </select>
           </td>

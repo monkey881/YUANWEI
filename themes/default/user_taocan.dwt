@@ -11,6 +11,10 @@
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
 <link href="/js/submodal/submodal.css" rel="stylesheet" type="text/css" />
+<style>
+a:link{text-decoration: none; color:#333;}
+a:hover{ color:#999;}
+</style>
 {* 包含脚本文件 *}
 {insert_scripts files='common.js,user.js'}
 </head>
@@ -64,7 +68,7 @@
             <td align="center" bgcolor="#ffffff">{$item.song_weight}</td>
             <td align="center" bgcolor="#ffffff">{$item.y_weight}</td>
             <td align="center" bgcolor="#ffffff">{$item.status}</td>
-            <td align="center" bgcolor="#ffffff"><font class="f6">{$item.handler}</font></td>
+            <td align="center" bgcolor="#ffffff"><font class="f7">{$item.handler}</font></td>
           </tr>
          
           <!--{/foreach}-->
@@ -97,7 +101,7 @@
 	background-color:#F5FACD;
 }
 .rili tr .psr {
-	background-color: #C1F9CB;
+	background-color: #F9FA23;
 	font-weight:bold;
 	font-size:16px;
 }
@@ -187,18 +191,19 @@ function getTaoCan(date)
             <td align="center" bgcolor="#ffffff">{$taocan.song_weight}</td>
             <td align="center" bgcolor="#ffffff">{$taocan.y_weight}</td>
             <td align="center" bgcolor="#ffffff">{$taocan.status}</td>
-            <td align="center" bgcolor="#ffffff"><font class="f6">{$taocan.handler}</font></td>
+            <td align="center" bgcolor="#ffffff"><font class="f7">{$taocan.handler}</font></td>
           </tr>
           </table>
           <div class="blank"></div>
        <table width="100%" border="0" align="center" cellpadding="10" cellspacing="0">
   <tr>
-    <td width="63" bgcolor="#C1F9CB">配送日</td>
+    <td width="63" bgcolor="#F9FA23">配送日</td>
     <td width="11">&nbsp;</td>
     <td width="63" bgcolor="#F9D095">已设置</td>
     <td width="15">&nbsp;</td>
     <td width="50" bgcolor="#999999">已配送</td>
     <td width="92">&nbsp;</td>
+
   </tr>
 </table>
       {$cal}

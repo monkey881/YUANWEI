@@ -16,7 +16,7 @@ a46b00259fe1763347e4df55fdbaf3e0 *./comment.php
 c9f3edcb176bfa13aac8ea25c992a7d0 *./cycle_image.php
 f4c340f0ab283568d6ff0fc9a320564a *./exchange.php
 5be220c4ff6c2ddaff3281f813414ba2 *./feed.php
-8f75b6467bb39f838b747db62e99076f *./flow.php
+7c40584587cb4f746491b21c34a5d062 *./flow.php
 ebe9db36886ea744e88612f8dabb4bff *./gallery.php
 751d6885cc1ecd0768ec4f3b3ceaba0f *./goods.php
 6aa6dc37ff50c94332f6915ab633429f *./goods_script.php
@@ -30,13 +30,13 @@ dc11379f3cfab0e2f48f53e3b4edf6bb *./pm.php
 4a204e0782a8a5cebd75fb7311c14bcd *./quotation.php
 8f8aad879e41e3bc32d5838d3a9f9d7a *./receive.php
 ff82e991146d27c557774ea4189a0cda *./region.php
-5d5058e5f3271d43006ebe00a7671d8a *./respond.php
+dace25fd3046ecc915fd68b42da89cd2 *./respond.php
 8f8af19646659977fdbdd9e7332f3f10 *./search.php
 477e57c761f4016d95ad91e5578c88be *./sitemaps.php
 245502e3eb93ec46b504adf28b0cc749 *./snatch.php
 359923bc6b017105a28d32db2b059a68 *./tag_cloud.php
 e1656bb27fdf525fb2cf59a6e3ac04f7 *./topic.php
-92aae2e1b69682942fafcdf458b6b073 *./user.php
+d57bf5b394977e5d050e1dbd1b0a6d96 *./user.php
 3f3d34c73773b12fdd1f9c2ed0f1cad7 *./vote.php
 fea383df5c357a4a98fa267ab749802f *./wholesale.php
 c7f1ca76f48b8188db09e715e0df3a74 *admin/account_log.php
@@ -273,7 +273,7 @@ fb02e1f107b911b09da8ea9fbe110497 *admin/templates/pack_list.htm
 e0eed1cc394c58c8b884c675c3c3d4f3 *admin/templates/page.htm
 8b46c1dc248a520cd5ca699698f80229 *admin/templates/pagefooter.htm
 2d79aba36f1c805af635fe3587f3ed95 *admin/templates/pageheader.htm
-c198e598c3e92981b27fd0769d691d45 *admin/templates/payment_edit.htm
+e458085f3d290391f8260e72afd8f2b2 *admin/templates/payment_edit.htm
 d74e14d5c6393b5710d7181d4bef2f4e *admin/templates/payment_list.htm
 b7c2687aa4e56ab16fb90efd26e5a9c9 *admin/templates/picture_batch.htm
 55463e030b1be889053b2e1728cfd0da *admin/templates/plugins.htm
@@ -359,7 +359,7 @@ ce105170814591e972a0bc27f6f05387 *admin/templates/wholesale_batch_info.htm
 5bf11968739afb86c404c7770bfe4519 *admin/templates/wholesale_info.htm
 3f827150907a315fe52aa70799ca9824 *admin/templates/wholesale_list.htm
 764a55f5cc4401470ffa1b81505cc632 *admin/styles/general.css
-e8ad6bdd94db241093ec3e896df052d7 *admin/styles/main.css
+6c2fa64a3696f72b80650bcae85b9c18 *admin/styles/main.css
 ba1fda2711a5c7c71904658b1739a31c *admin/js/colorselector.js
 c85034b8c1d0b7c8687a3c121fba2c4b *admin/js/colorselector_topic.js
 d318b71e92703cc765a448bf9f779798 *admin/js/common.js
@@ -391,7 +391,7 @@ d87b0d184291beacc3cb567a398770fd *api/client/includes/init.php
 33ce1dcbe30f97a96076c2f068d2ad81 *api/client/includes/lib_api.php
 3c65a7b03b3e8c03e2639a0275171f50 *api/client/includes/lib_struct.php
 f6b4c10c1e13723491c3525e1be92e70 *includes/cls_captcha.php
-a285894740a6379326ff2759d6153003 *includes/cls_ecshop.php
+c6d3a2492cada9576c04424da1bf286d *includes/cls_ecshop.php
 6895c1a516545aebf1d70d7860f0dd90 *includes/cls_error.php
 6e67d76d4e32dbc4a6de4f91c776bd72 *includes/cls_iconv.php
 d317320064204945600c919d81d5dc5a *includes/cls_image.php
@@ -402,13 +402,13 @@ e17457263a3596278a099507ffc58cf7 *includes/cls_session.php
 ad6e68380bbc8d8109d08e75283bf21c *includes/cls_sms.php
 258d0d74c4aaa3ac3ae5d34fd8847fd1 *includes/cls_smtp.php
 2ce7dbe0fbc28700758222d7b58d171d *includes/cls_sql_executor.php
-5195ed8a7f3df9497a89258bc86a5a76 *includes/cls_template.php
+20558e03aacb70bc1e772c4bcd731463 *includes/cls_template.php
 85841971a8c7b8bb905ccab0270388a3 *includes/cls_transport.php
 125728e86103d3cbe31053f91aef9a65 *includes/inc_constant.php
 874116b88d4806a56977e81538f9a997 *includes/init.php
 06a97bcf12912225a18d74039e8f865f *includes/lib.debug.php
 4fae87beb44e2490194fc9c85efadc0a *includes/lib_article.php
-cc6dfe91b7d1176985029bc5786e5670 *includes/lib_base.php
+af5aa0f1afd4774b40cad4d8bc361e99 *includes/lib_base.php
 3a581fb838c54b6e8914bf1ccf68b3f2 *includes/lib_clips.php
 75043ae0ed7e47056ce272f31bc9e2cd *includes/lib_code.php
 e989f70b55648207802780094e70e8aa *includes/lib_common.php
@@ -419,7 +419,7 @@ d18423ce350cbde604453cec2ec0473b *includes/lib_license.php
 939c4404d5dcb976bf0eea7b84e220a6 *includes/lib_main.php
 52f549e0aadb6e7520a5981e0365f27f *includes/lib_order.php
 5dd33b5c45ef5fab4df9f69e4ae9916c *includes/lib_passport.php
-f5004a38d1ead4ad665eecf057cd04d7 *includes/lib_payment.php
+96005cd61bbc76d3dd21fb234e510478 *includes/lib_payment.php
 261a9802540a08cbebea78be11f0e599 *includes/lib_time.php
 b7906c73e501d8c5a95bf267f05fb695 *includes/lib_transaction.php
 ce73ab57965ccaa8ddd65d40b96aa6c8 *includes/lib_uc.php
@@ -450,7 +450,6 @@ a07ccd01a8b4d0fdf161c4202fcda954 *includes/modules/payment/post.php
 6a0d455ba0acb7b4e657e16f049b34bb *includes/modules/payment/shenzhou.php
 d88da69822bbc1a04aecbb8bbacc878b *includes/modules/payment/tenpay.php
 33dcc778140b8b6134591542f36281fa *includes/modules/payment/tenpayc2c.php
-c97fd444e26f4760f1516a06189a9438 *includes/modules/payment/upop.php
 7bd8ade6e914cae25895d81cccfacb22 *includes/modules/integrates/discuz55.php
 59e21611ba97421021c520cfa4b2545f *includes/modules/integrates/dvbbs.php
 3b480fb4b291ea74d76182c794373071 *includes/modules/integrates/ecshop.php
@@ -499,7 +498,7 @@ d0537985557c83beec1f5614e9d94d9e *languages/zh_tw/shipping/presswork.php
 ad37ced499a3a936529513e233605a34 *languages/zh_tw/shipping/sto_express.php
 9c9a20f532ffbb11f01dd442ab903db6 *languages/zh_tw/shipping/yto.php
 69e2c7dd71066c424944d09ada7f5862 *languages/zh_tw/shipping/zto.php
-3c81fd45cf3a6ddd8e51aed185ca1d1b *languages/zh_tw/payment/alipay.php
+2207b0dc18ba5651ede4f7d6c14a9d85 *languages/zh_tw/payment/alipay.php
 cf3b8c0033cc0459112054ac936554f7 *languages/zh_tw/payment/balance.php
 7069cf8ffb81e8a74329be34a2618def *languages/zh_tw/payment/bank.php
 82360fdd572a6dbcd75797d73361d469 *languages/zh_tw/payment/cappay.php
@@ -518,7 +517,6 @@ f1886f28d86df282243a6c509116c72c *languages/zh_tw/payment/tenpay.php
 bbf10c2cab0b6ca429a5e7d7f8d65b58 *languages/zh_tw/payment/udpay.php
 eae9909c02930ee3e94d16786ed227d0 *languages/zh_tw/payment/yeepay.php
 fc282118827a5ea0c19214b235df689f *languages/zh_tw/payment/yeepayszx.php
-9e33995e6d1769dd0097c40f5e7933a5 *languages/zh_tw/payment/upop.php
 fff9e407f4becd00f3052142fa73e656 *languages/zh_tw/cron/auto_manage.php
 f36c05c959fb61c0897956f697e701b4 *languages/zh_tw/cron/ipdel.php
 8fdd436fbc8220efc244dc45c587754b *languages/zh_tw/convert/shopex46.php
@@ -579,7 +577,7 @@ b76747f02bb362b26cc4021584eb8f82 *languages/zh_tw/admin/magazine_list.php
 470be2a8b729db2145605ffb504d5b28 *languages/zh_tw/admin/order.php
 b1c06c4430c60cff9396e55107567e01 *languages/zh_tw/admin/pack.php
 f5328b24507b1eac633b9a4651b35bdf *languages/zh_tw/admin/package.php
-0d087ea58ae3d22ddfb830fc7d76035d *languages/zh_tw/admin/payment.php
+d5e8a03cfd74cecd41511d38f5d85142 *languages/zh_tw/admin/payment.php
 98e534ebc54dc611eb318dfdf70ae5fa *languages/zh_tw/admin/picture_batch.php
 90fac9072887e1247f6b719592d04953 *languages/zh_tw/admin/plugins.php
 caa30a984552719fba6c7a8067bbef3e *languages/zh_tw/admin/privilege.php
@@ -629,7 +627,7 @@ e0f885a712d07d4b03820510621b9186 *languages/zh_cn/shipping/sf_express.php
 5a7e3df58811ed49830f11d58a719085 *languages/zh_cn/shipping/sto_express.php
 ce62d64862610a2c3119719edd383d65 *languages/zh_cn/shipping/yto.php
 bd8df4586a53a2a19f2704b13ad89886 *languages/zh_cn/shipping/zto.php
-e248a4a75b0df24e637220f1fada5cd9 *languages/zh_cn/payment/alipay.php
+678ec1fb6f69b7e1ef0e0b2119038101 *languages/zh_cn/payment/alipay.php
 77d984d1b0735ca4183f317f24ff17de *languages/zh_cn/payment/balance.php
 bc1460d96fefc5e285db05a9dc75b820 *languages/zh_cn/payment/bank.php
 9f3f14c9bae528752d98c88de4dd807f *languages/zh_cn/payment/cappay.php
@@ -648,7 +646,6 @@ e5e5912d2c3093d45cd13c9d082b6ad7 *languages/zh_cn/payment/tenpayc2c.php
 2900e886897dc403de1bd1c6a002886d *languages/zh_cn/payment/udpay.php
 eae9909c02930ee3e94d16786ed227d0 *languages/zh_cn/payment/yeepay.php
 523f609524cb58dd8730c90a8bd65d2d *languages/zh_cn/payment/yeepayszx.php
-3ee87f9b88711a12939659bd9dd5a03b *languages/zh_cn/payment/upop.php
 9acbb28da4054c0eace11f92178cd694 *languages/zh_cn/cron/auto_manage.php
 9cda558019630094d9d6ab502be7fcd2 *languages/zh_cn/cron/ipdel.php
 cf321770b5ca4822a63c3d68bee19e6a *languages/zh_cn/convert/shopex46.php
@@ -709,7 +706,7 @@ cdfacedac5b37f11911d1ee3e2edf9f0 *languages/zh_cn/admin/navigator.php
 9dfe28924b098a6b2652fd725accf6ad *languages/zh_cn/admin/order.php
 f0c488c2018526f8bf4801d932acd030 *languages/zh_cn/admin/pack.php
 618e7473ccf6786a5414181d4c2b6fac *languages/zh_cn/admin/package.php
-04b16cc164ae22da57aa4b91ed41985e *languages/zh_cn/admin/payment.php
+feb23ed5e37e2914369ce38d51bce78e *languages/zh_cn/admin/payment.php
 73e0c856ea21cc2826fe6879bd18d626 *languages/zh_cn/admin/picture_batch.php
 e2589241aed3f416d7e92b0cb4e72f8f *languages/zh_cn/admin/plugins.php
 67494cc3d5f0337e172288a9863258b4 *languages/zh_cn/admin/privilege.php
@@ -760,7 +757,7 @@ a9445e512890861487f29795d78b734c *languages/en_us/shipping/ems.php
 8494aee086beb2d9a2f9f091f5ce6033 *languages/en_us/shipping/sto_express.php
 1da99c3e8247cdb846323b48bf8dc9ef *languages/en_us/shipping/yto.php
 46c848a7d63d69d82677b9a5f7059545 *languages/en_us/shipping/zto.php
-6b617dbecefbe8ce30fe55b50d2c9fb7 *languages/en_us/payment/alipay.php
+80b66bbd73d03c2ed39329f804cc13d7 *languages/en_us/payment/alipay.php
 5528e2e9855583e46f75513141262471 *languages/en_us/payment/balance.php
 219a5fc6985f0fb93e03dd7d21270fb3 *languages/en_us/payment/bank.php
 cc1bd9ca7e6f525d6f316cf298725d41 *languages/en_us/payment/cappay.php
@@ -779,7 +776,6 @@ f1c557b9d7d4b0d6e05eb86f23907892 *languages/en_us/payment/tenpayc2c.php
 2f6df0ddfcecb120ea92c3450478f66d *languages/en_us/payment/udpay.php
 117b5acd2e8f8adece9556ad18dda74b *languages/en_us/payment/yeepay.php
 4e0ad761e3794203e4564380f9652504 *languages/en_us/payment/yeepayszx.php
-fcf5a5025c9c8fa511d9420f77b45484 *languages/en_us/payment/upop.php
 2c2555e226a368416f52f05060aa975d *languages/en_us/cron/auto_manage.php
 57e0384b972ef5ac51faafe59b7ec605 *languages/en_us/cron/ipdel.php
 b826697fa389a23cc4f4004064825653 *languages/en_us/convert/shopex46.php
@@ -840,7 +836,7 @@ fa463a0c34749b229461725a9417e48f *languages/en_us/admin/message.php
 52604abc720da67665cb0c47723a6f32 *languages/en_us/admin/order.php
 1611c4967780f0080e942c8a264c457a *languages/en_us/admin/pack.php
 0924460fb89c6b479710a4fc8dd49157 *languages/en_us/admin/package.php
-5f7cbc7d3aa114e726a9a58eda4f3ad8 *languages/en_us/admin/payment.php
+d46e02822700edba9ed6b531c2f08c23 *languages/en_us/admin/payment.php
 1278251bda5777873a29f4210224733d *languages/en_us/admin/picture_batch.php
 822e58aeccff009fa64ebe1fbf9752e5 *languages/en_us/admin/plugins.php
 359dc8112de11d45b4629dd48d562e89 *languages/en_us/admin/privilege.php
@@ -903,11 +899,11 @@ a254d20bbcbb43aff3696b0b91b1cd79 *wap/includes/init.php
 d3eb9228bc1724c98fae71686bb8107e *mobile/category.php
 d873a36eedefaa113a7828b1a3ce5369 *mobile/cat_all.php
 1cea69454d24658f3cfec5b6580a4b3f *mobile/comment.php
-1164019b9e97a5711d1b1d9248b32493 *mobile/goods.php
+eba2116ab4f52295d9b8ecc9688ab9ab *mobile/goods.php
 92516a81d895aeca5779e24ceb51fc9d *mobile/goods_list.php
 708d070682ec798933c6d35f555a2c94 *mobile/index.php
-8b4bc297a9db81f05d147fb0110f4ebd *mobile/order.php
+2084338480cc75a999709e543a3dbfef *mobile/order.php
 b48f252fdd1b97333c1ed591972218e8 *mobile/search.php
-f867c45a1f21355307123de0d86e8461 *mobile/user.php
+386fad2e1a0a44ba80da22f941178e7b *mobile/user.php
 56c84f0c80427809ddb473c13dc2e995 *mobile/includes/init.php
 4c7e6d6652078681880a316bbb1a48e7 *mobile/includes/lib_main.php

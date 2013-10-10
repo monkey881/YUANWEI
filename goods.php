@@ -132,7 +132,7 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'gotopage')
     die($json->encode($res));
 }
 
-
+    $smarty->assign('usercookie',  $_COOKIE["user"]);                             //此处将有奖竞猜的cookie传递到商品页面
 /*------------------------------------------------------ */
 //-- PROCESSOR
 /*------------------------------------------------------ */
@@ -152,7 +152,6 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 
     /* 获得商品的信息 */
     $goods = get_goods_info($goods_id);
-
     if ($goods === false)
     {
         /* 如果没有找到任何记录则跳回到首页 */
@@ -238,7 +237,6 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
         $smarty->assign('pictures',            get_goods_gallery($goods_id));                    // 商品相册
         $smarty->assign('bought_goods',        get_also_bought($goods_id));                      // 购买了该商品的用户还购买了哪些商品
         $smarty->assign('goods_rank',          get_goods_rank($goods_id));                       // 商品的销售排名
-
         //获取tag
         $tag_array = get_tags($goods_id);
         $smarty->assign('tags',                $tag_array);                                       // 商品的标记
@@ -358,7 +356,6 @@ function get_linked_articles($goods_id)
 
         $arr[] = $row;
     }
-
     return $arr;
 }
 

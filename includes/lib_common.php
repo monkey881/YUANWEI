@@ -655,7 +655,19 @@ function get_brand_list()
 
     return $brand_list;
 }
+function get_brand_list2()
+{
+    $sql = 'SELECT * FROM ' . $GLOBALS['ecs']->table('brand') . ' ORDER BY sort_order';
+    $res = $GLOBALS['db']->getAll($sql);
 
+    $brand_list = array();
+    foreach ($res AS $row)
+    {
+        $brand_list[$row['brand_id']] = addslashes($row['brand_name']);
+    }
+
+    return $res;
+}
 /**
  * 获得某个分类下
  *

@@ -332,7 +332,7 @@ if (!$smarty->is_cached('category.dwt', $cache_id))
 	$num=1;
 	$arr=array();
 	while ($row = $GLOBALS['db']->fetchRow($hy)){
-		 $arr[$row['goods_id']]['name']             = $row['goods_name'];
+		$arr[$row['goods_id']]['name']             = $row['goods_name'];
         $arr[$row['goods_id']]['goods_brief']      = $row['goods_brief'];
         $arr[$row['goods_id']]['goods_style_name'] = add_style($row['goods_name'],$row['goods_name_style']);
         $arr[$row['goods_id']]['market_price']     = price_format($row['market_price']);
@@ -368,7 +368,7 @@ if (!$smarty->is_cached('category.dwt', $cache_id))
     $smarty->assign('top_goods',        get_top10());                  // 销售排行
     $smarty->assign('show_marketprice', $_CFG['show_marketprice']);
     $smarty->assign('category',         $cat_id);
-	 $smarty->assign('hy',         $arr);
+	$smarty->assign('hy',         $arr);
     $smarty->assign('brand_id',         $brand);
     $smarty->assign('price_max',        $price_max);
     $smarty->assign('price_min',        $price_min);

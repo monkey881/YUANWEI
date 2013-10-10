@@ -11,10 +11,11 @@
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
 {* 包含脚本文件 *}
+{insert_scripts files='jquery-1.10.2.min.js,json2.js'}
 {insert_scripts files='common.js,user.js'}
 </head>
 <body>
-<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_header2.lbi" --><!-- #EndLibraryItem -->
 <!--当前位置 start-->
 <div class="block box">
  <div id="ur_here">
@@ -48,7 +49,7 @@
             var {$key} = "{$item}";
           {/foreach}
         </script>
-      <h5><span>{$lang.profile}</span></h5>
+	  <div class="mx-bar hasb"><span>{$lang.profile}</span></div>
       <div class="blank"></div>
      <form action="user.php" method="post" enctype="multipart/form-data" name="formEdit" onSubmit="return userEdit()">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
@@ -96,14 +97,14 @@
 		<tr>
 			<td width="28%" align="right" bgcolor="#FFFFFF" <!-- {if $field.is_need} -->id="extend_field{$field.id}i"<!--{/if}-->>{$field.reg_field_name}：</td>
 			<td width="72%" align="left" bgcolor="#FFFFFF">
-			<input name="extend_field{$field.id}" type="text" class="inputBg" value="{$field.content}"/><!-- {if $field.is_need} --><span style="color:#FF0000"> *</span><!-- {/if} -->
+			<input name="extend_field{$field.id}" type="text" size="25" class="inputBg" value="{$field.content}"/><!-- {if $field.is_need} --><span style="color:#FF0000"> *</span><!-- {/if} -->
 			</td>
 		</tr>
 		<!-- {/if} -->
 		{/foreach}
                 <tr>
                   <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_edit_profile" />
-                    <input name="submit" type="submit" value="{$lang.confirm_edit}" class="bnt_blue_1" style="border:none;" />
+                    <input name="submit" type="submit" value="{$lang.confirm_edit}" class="bnt_blue_1" />
                   </td>
                 </tr>
        </table>
@@ -124,7 +125,7 @@
         </tr>
         <tr>
           <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_edit_password" />
-            <input name="submit" type="submit" class="bnt_blue_1" style="border:none;" value="{$lang.confirm_edit}" />
+            <input name="submit" type="submit" class="bnt_blue_1" value="{$lang.confirm_edit}" />
           </td>
         </tr>
       </table>
@@ -137,7 +138,7 @@
           var {$key} = "{$item}";
         {/foreach}
       </script>
-      <h5><span>{$lang.label_bonus}</span></h5>
+	  <div class="mx-bar hasb"><span>{$lang.label_bonus}</span></div>
       <div class="blank"></div>
        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
         <tr>
@@ -168,21 +169,21 @@
       <div class="blank5"></div>
       <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
       <div class="blank5"></div>
-      <h5><span>{$lang.add_bonus}</span></h5>
+	  <div class="mx-bar hasb"><span>{$lang.add_bonus}</span></div>
       <div class="blank"></div>
       <form name="addBouns" action="user.php" method="post" onSubmit="return addBonus()">
         <div style="padding: 15px;">
         {$lang.bonus_number}
           <input name="bonus_sn" type="text" size="30" class="inputBg" />
           <input type="hidden" name="act" value="act_add_bonus" class="inputBg" />
-          <input type="submit" class="bnt_blue_1" style="border:none;" value="{$lang.add_bonus}" />
+          <input type="submit" class="bnt_blue_1" value="{$lang.add_bonus}" />
         </div>
       </form>
     <!-- {/if} -->
    <!--用户红包结束-->
       <!--#订单列表界面 start-->
        <!-- {if $action eq 'order_list'} -->
-       <h5><span>{$lang.label_order}</span></h5>
+	   <div class="mx-bar hasb"><span>{$lang.label_order}</span></div>
        <div class="blank"></div>
        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
           <tr align="center">
@@ -198,14 +199,22 @@
             <td align="center" bgcolor="#ffffff">{$item.order_time}</td>
             <td align="right" bgcolor="#ffffff">{$item.total_fee}</td>
             <td align="center" bgcolor="#ffffff">{$item.order_status}</td>
-            <td align="center" bgcolor="#ffffff"><font class="f6">{$item.handler}</font></td>
+            <td align="center" bgcolor="#ffffff"><font class="f6">{$item.handler}</font>
+            <!-- {if $item.is_comment eq "1"} --> 
+    <font style="color:#006bd0;float:right;">已评价</font>
+                <!-- {else} -->
+
+    <a href="user.php?act=order_comment&order_id={$item.order_id}" style="color:red;float:right;">去评价</a>   
+                <!-- {/if} -->
+                
+                </td>
           </tr>
           <!--{/foreach}-->
           </table>
         <div class="blank5"></div>
        <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
        <div class="blank5"></div>
-       <h5><span>{$lang.merge_order}</span></h5>
+	   <div class="mx-bar hasb"><span>{$lang.merge_order}</span></div>
        <div class="blank"></div>
         <script type="text/javascript">
         {foreach from=$lang.merge_order_js item=item key=key}
@@ -230,7 +239,7 @@
 
                 </select></td>
               <td width="36%" bgcolor="#ffffff">&nbsp;<input name="act" value="merge_order" type="hidden" />
-              <input type="submit" name="Submit"  class="bnt_blue_1" style="border:none;"  value="{$lang.merge_order}" /></td>
+              <input type="submit" name="Submit"  class="bnt_blue_1"  value="{$lang.merge_order}" /></td>
             </tr>
             <tr>
               <td bgcolor="#ffffff">&nbsp;</td>
@@ -242,7 +251,7 @@
       <!--#订单列表界面 end-->
        <!--#包裹状态查询界面 start-->
       <!-- {if $action eq 'track_packages'} -->
-        <h5><span>{$lang.label_track_packages}</span></h5>
+		<div class="mx-bar hasb"><span>{$lang.label_track_packages}</span></div>
         <div class="blank"></div>
         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd" id="order_table">
         <tr align="center">
@@ -272,7 +281,7 @@
     <!--#包裹状态查询界面 end-->
      <!-- ==========订单详情页面,包括：订单状态，商品列表，费用总计，收货人信息，支付方式，其它信息========== -->
       <!--{if $action eq order_detail} -->
-        <h5><span>{$lang.order_status}</span></h5>
+		<div class="mx-bar hasb"><span>{$lang.order_status}</span></div>
         <div class="blank"></div>
          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
         <tr>
@@ -327,11 +336,9 @@
         <!--{/if}-->
       </table>
         <div class="blank"></div>
-        <h5><span>{$lang.goods_list}</span>
-        <!-- {if $allow_to_cart} -->
+		<div class="mx-bar hasb"><span>{$lang.goods_list}</span><!-- {if $allow_to_cart} -->
         <a href="javascript:;" onclick="returnToCart({$order.order_id})" class="f6">{$lang.return_to_cart}</a>
-        <!-- {/if} -->
-        </h5>
+        <!-- {/if} --></div>
         <div class="blank"></div>
          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
           <tr>
@@ -375,7 +382,7 @@
           </tr>
         </table>
          <div class="blank"></div>
-        <h5><span>{$lang.fee_total}</span></h5>
+		<div class="mx-bar hasb"><span>{$lang.fee_total}</span></div>
         <div class="blank"></div>
          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
           <tr>
@@ -436,7 +443,7 @@
     <!--{/if}-->
         </table>
          <div class="blank"></div>
-        <h5><span>{$lang.consignee_info}</span></h5>
+		<div class="mx-bar hasb"><span>{$lang.consignee_info}</span></div>
         <div class="blank"></div>
          <!-- {if $order.allow_update_address gt 0} -->
           <form action="user.php" method="post" name="formAddress" id="formAddress">
@@ -517,7 +524,7 @@
           </table>
           <!-- {/if} -->
           <div class="blank"></div>
-        <h5><span>{$lang.payment}</span></h5>
+		<div class="mx-bar hasb"><span>{$lang.payment}</span></div>
         <div class="blank"></div>
         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
                 <tr>
@@ -547,7 +554,7 @@
                 </tr>
               </table>
         <div class="blank"></div>
-        <h5><span>{$lang.other_info}</span></h5>
+		<div class="mx-bar hasb"><span>{$lang.other_info}</span></div>
         <div class="blank"></div>
         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
           <!-- {if $order.shipping_id > 0} -->
@@ -619,7 +626,7 @@
             var {$key} = "{$item}";
           {/foreach}
         </script>
-        <h5><span>{$lang.user_balance}</span></h5>
+		<div class="mx-bar hasb"><span>{$lang.user_balance}</span></div>
         <div class="blank"></div>
          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
           <tr>
@@ -771,7 +778,7 @@
       <!--#会员余额 end-->
       <!--#收货地址页面 -->
       <!--{if $action eq 'address_list'} -->
-        <h5><span>{$lang.consignee_info}</span></h5>
+		<div class="mx-bar hasb"><span>{$lang.consignee_info}</span></div>
         <div class="blank"></div>
          {* 包含脚本文件 *}
             {insert_scripts files='utils.js,transport.js,region.js,shopping_flow.js'}
@@ -863,10 +870,10 @@
                 <tr>
                   <td align="right" bgcolor="#ffffff">&nbsp;</td>
                   <td colspan="3" align="center" bgcolor="#ffffff"><!-- {if $consignee.consignee && $consignee.email} -->
-                    <input type="submit" name="submit" class="bnt_blue_1" value="{$lang.confirm_edit}" />
-                    <input name="button" type="button" class="bnt_blue"  onclick="if (confirm('{$lang.confirm_drop_address}'))location.href='user.php?act=drop_consignee&id={$consignee.address_id}'" value="{$lang.drop}" />
+                    <input type="submit" name="submit" class="mx-btn s1" value="{$lang.confirm_edit}" />
+                    <input name="button" type="button" class="mx-btn s1"  onclick="if (confirm('{$lang.confirm_drop_address}'))location.href='user.php?act=drop_consignee&id={$consignee.address_id}'" value="{$lang.drop}" />
                     <!-- {else} -->
-                    <input type="submit" name="submit" class="bnt_blue_2"  value="{$lang.add_address}"/>
+                    <input type="submit" name="submit" class="mx-btn s1"  value="{$lang.add_address}"/>
                     <!-- {/if} -->
                     <input type="hidden" name="act" value="act_edit_address" />
                     <input name="address_id" type="hidden" value="{$consignee.address_id}" />
@@ -879,7 +886,7 @@
     <!--#收货地址添加页面 -->
       <!--* 积分兑换-->
        <!--{if $action eq 'transform_points'} -->
-       <h5><span>{$lang.transform_points}</span></h5>
+	   <div class="mx-bar hasb"><span>{$lang.transform_points}</span></div>
              <div class="blank"></div>
        <!--{if $exchange_type eq 'ucenter'}-->
         <form action="user.php" method="post" name="transForm" onsubmit="return calcredit();">

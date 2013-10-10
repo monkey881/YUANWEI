@@ -21,7 +21,7 @@ $_LANG['no_records'] = '没有记录';
 $_LANG['shot_message'] = "短消息";
 
 /* 用户菜单 */
-$_LANG['label_welcome'] = '欢迎页';
+$_LANG['label_welcome'] = '我的原味';
 $_LANG['label_taocan'] = '套餐管理';
 $_LANG['label_profile'] = '用户信息';
 $_LANG['label_order'] = '我的订单';
@@ -439,17 +439,17 @@ $_LANG['passwd_balnk'] = '密码中不能包含空格';
 $_LANG['user_pic'] = '用户头像';
 
 /* 用户中心默认页面 */
-$_LANG['welcome_to'] = '欢迎您回到';
-$_LANG['last_time'] = '您的上一次登录时间';
+$_LANG['welcome_to'] = '您好！';
+$_LANG['last_time'] = '上次登录';
 $_LANG['your_account'] = '您的账户';
 $_LANG['your_notice'] = '用户提醒';
-$_LANG['your_surplus'] = '余额';
+$_LANG['your_surplus'] = '帐户余额';
 $_LANG['credit_line'] = '信用额度';
 $_LANG['your_bonus'] = '红包';
 $_LANG['your_message'] = '留言';
 $_LANG['your_order'] = '订单';
 $_LANG['your_integral'] = '积分';
-$_LANG['your_level'] = '您的等级是 %s ';
+$_LANG['your_level'] = '会员等级：%s';
 $_LANG['next_level'] = ',您还差 %s 积分达到 %s ';
 $_LANG['attention'] = '关注';
 $_LANG['no_attention'] = '取消关注';

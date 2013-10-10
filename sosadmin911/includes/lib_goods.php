@@ -836,8 +836,7 @@ function goods_list($is_delete, $real_goods=1, $conditions = '')
         $filter['extension_code']   = empty($_REQUEST['extension_code']) ? '' : trim($_REQUEST['extension_code']);
         $filter['is_delete']        = $is_delete;
         $filter['real_goods']       = $real_goods;
-		$filter['is_taocan']       = empty($_REQUEST['is_taocan']) ? 0 : intval($_REQUEST['is_taocan']);
-
+		$filter['is_taocan']         = empty($_REQUEST['is_taocan']) ? 0 : intval($_REQUEST['is_taocan']);
         $where = $filter['cat_id'] > 0 ? " AND " . get_children($filter['cat_id']) : '';
 
         /* 推荐类型 */
@@ -864,7 +863,12 @@ function goods_list($is_delete, $real_goods=1, $conditions = '')
         {
             $where .= ' AND goods_number <= warn_number ';
         }
-
+		
+		/* 库存警告 */
+        if ($filter['is_taocan'])
+        {
+            $where .= ' AND is_taocan = 1 ';
+        }
         /* 品牌 */
         if ($filter['brand_id'])
         {
@@ -892,12 +896,6 @@ function goods_list($is_delete, $real_goods=1, $conditions = '')
         if ($filter['is_on_sale'] !== '')
         {
             $where .= " AND (is_on_sale = '" . $filter['is_on_sale'] . "')";
-        }
-		
-		/* 套餐 */
-        if ($filter['is_taocan'] !== '')
-        {
-            $where .= " AND (is_taocan = '" . $filter['is_taocan'] . "')";
         }
 
         /* 供货商 */

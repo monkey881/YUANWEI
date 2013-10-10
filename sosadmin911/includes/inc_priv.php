@@ -32,8 +32,8 @@ if (!defined('IN_ECS'))
     $purview['15_batch_edit']        = 'goods_batch';
     $purview['16_goods_script']      = 'gen_goods_script';
     $purview['17_tag_manage']        = 'tag_manage';
-    $purview['50_virtual_card_list'] = 'virualcard';
-    $purview['51_virtual_card_add']  = 'virualcard';
+    //$purview['50_virtual_card_list'] = 'virualcard';
+   //$purview['51_virtual_card_add']  = 'virualcard';
     $purview['52_virtual_card_change'] = 'virualcard';
     $purview['goods_auto']           = 'goods_auto';
 
@@ -96,6 +96,11 @@ if (!defined('IN_ECS'))
     $purview['z_clicks_stats']       = 'ad_manage';
     $purview['ad_position']          = 'ad_manage';
     $purview['ad_list']              = 'ad_manage';
+    //二次开发增加doodle
+    $purview['doodle']				 = 'doodle';
+    //二次开发增加套餐管理
+    $purview['taocan']              ='taocan';
+    $purview['peisong']             ='peisong';
 
 //订单管理权限
     $purview['02_order_list']        = 'order_view';
@@ -150,9 +155,4 @@ if (!defined('IN_ECS'))
     $purview['magazine_list']        = 'magazine_list';
     $purview['view_sendlist']        = 'view_sendlist';
 
-$purview['taocan_add']          = 'goods_manage';
-$purview['taocan_list']          = 'goods_manage';
-$purview['taocan_order']          = 'goods_manage';
-$purview['taocan_peisong']          = 'goods_manage';
-$purview['taocan_test']          = 'goods_manage';
 ?>

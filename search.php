@@ -113,6 +113,7 @@ if ($_REQUEST['act'] == 'advanced_search')
 /*------------------------------------------------------ */
 else
 {
+	 $_REQUEST['search_type']   = !empty($_REQUEST['search_type'])   ? htmlspecialchars(trim($_REQUEST['search_type']))     : '';//二次开发增加文章搜索等
     $_REQUEST['keywords']   = !empty($_REQUEST['keywords'])   ? htmlspecialchars(trim($_REQUEST['keywords']))     : '';
     $_REQUEST['brand']      = !empty($_REQUEST['brand'])      ? intval($_REQUEST['brand'])      : 0;
     $_REQUEST['category']   = !empty($_REQUEST['category'])   ? intval($_REQUEST['category'])   : 0;
@@ -121,12 +122,68 @@ else
     $_REQUEST['goods_type'] = !empty($_REQUEST['goods_type']) ? intval($_REQUEST['goods_type']) : 0;
     $_REQUEST['sc_ds']      = !empty($_REQUEST['sc_ds']) ? intval($_REQUEST['sc_ds']) : 0;
     $_REQUEST['outstock']   = !empty($_REQUEST['outstock']) ? 1 : 0;
+	
+	//二次开发
+	if($_REQUEST['search_type']=='农户'){//搜索农户
+		 $keywords_nonghu = $_REQUEST['keywords'];
+		  $sql = "SELECT * FROM ".$ecs->table('brand')."WHERE `brand_name` LIKE '%$keywords_nonghu%'";  
+   		$result_nonghu = $db->getAll($sql);
+		$query = $db->query($sql);
+		 $nums_nonghu = $db->num_rows($query);
+		 $ur_here = '农户搜索';
+		 $position = assign_ur_here(0, $ur_here . ($_REQUEST['keywords'] ? '_' . $_REQUEST['keywords'] : ''));
+		 $smarty->assign('ur_here',    $position['ur_here']);  // 当前位置
+    	  $smarty->assign('result_nonghu',             $result_nonghu);
+		  $smarty->assign('display_type','0');
+		  $smarty->assign('search_keywords',   stripslashes(htmlspecialchars_decode($_REQUEST['keywords'])));
+			$smarty->assign('nums_nonghu',$nums_nonghu);
+		  
 
+		  assign_template();
+    assign_dynamic('search');
+	$position = assign_ur_here(0, $ur_here . ($_REQUEST['keywords'] ? '_' . $_REQUEST['keywords'] : ''));
+    $smarty->assign('page_title', $position['title']);    // 页面标题
+    $smarty->assign('ur_here',    $position['ur_here']);  // 当前位置
+    $smarty->assign('intromode',      $intromode);
+    $smarty->assign('categories', get_categories_tree()); // 分类树
+    $smarty->assign('helps',       get_shop_help());      // 网店帮助
+    $smarty->assign('top_goods',  get_top10());           // 销售排行
+    $smarty->assign('promotion_info', get_promotion_info());
+	$smarty->display('search.dwt');
+		  exit;
+	}
+	if($_REQUEST['search_type']=='菜谱'){//搜索菜谱
+		$keywords_caipu = $_REQUEST['keywords'];
+		$sql = "SELECT ecs_article.article_id,ecs_article.title,ecs_article.file_url,ecs_article.description from ecs_article, ecs_article_cat where ecs_article.cat_id=ecs_article_cat.cat_id AND ecs_article_cat.cat_name='菜谱' AND ecs_article.title like '%$keywords_caipu%'";  
+   		$result_caipu = $db->getAll($sql);
+		$query = $db->query($sql);		 
+		 $nums_caipu = $db->num_rows($query);
+		 $ur_here = '菜谱搜索';
+		 $position = assign_ur_here(0, $ur_here . ($_REQUEST['keywords'] ? '_' . $_REQUEST['keywords'] : ''));
+		 $smarty->assign('ur_here',    $position['ur_here']);  // 当前位置
+		 
+    	  $smarty->assign('result_caipu',             $result_caipu);
+		  $smarty->assign('display_type','1');
+		      $smarty->assign('search_keywords',   stripslashes(htmlspecialchars_decode($_REQUEST['keywords'])));
+			$smarty->assign('nums_caipu',$nums_caipu);
+			  assign_template();
+    assign_dynamic('search');
+	$position = assign_ur_here(0, $ur_here . ($_REQUEST['keywords'] ? '_' . $_REQUEST['keywords'] : ''));
+    $smarty->assign('page_title', $position['title']);    // 页面标题
+    $smarty->assign('ur_here',    $position['ur_here']);  // 当前位置
+    $smarty->assign('intromode',      $intromode);
+    $smarty->assign('categories', get_categories_tree()); // 分类树
+    $smarty->assign('helps',       get_shop_help());      // 网店帮助
+    $smarty->assign('top_goods',  get_top10());           // 销售排行
+    $smarty->assign('promotion_info', get_promotion_info());
+	$smarty->display('search.dwt');
+		  exit;
+	}else{//搜索商品
     $action = '';
     if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'form')
     {
         /* 要显示高级搜索栏 */
-        $adv_value['keywords']  = htmlspecialchars(stripcslashes($_REQUEST['keywords']));
+       $adv_value['keywords']  = htmlspecialchars(stripcslashes($_REQUEST['keywords']));
         $adv_value['brand']     = $_REQUEST['brand'];
         $adv_value['min_price'] = $_REQUEST['min_price'];
         $adv_value['max_price'] = $_REQUEST['max_price'];
@@ -197,7 +254,7 @@ else
             $operator   = " AND ";
         }
 
-        $keywords = 'AND (';
+         $keywords = 'AND (';
         $goods_ids = array();
         foreach ($arr AS $key => $val)
         {
@@ -381,7 +438,7 @@ else
     }
 
     /* 查询商品 */
-    $sql = "SELECT g.goods_id, g.goods_name, g.market_price, g.is_new, g.is_best, g.is_hot, g.shop_price AS org_price, ".
+    $sql = "SELECT g.goods_id, g.goods_name, g.market_price,g.goods_weight,g.click_count, g.is_new, g.is_best, g.is_hot, g.shop_price AS org_price, ".
                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
                 "g.promote_price, g.promote_start_date, g.promote_end_date, g.goods_thumb, g.goods_img, g.goods_brief, g.goods_type ".
             "FROM " .$ecs->table('goods'). " AS g ".
@@ -447,6 +504,13 @@ else
         $arr[$row['goods_id']]['goods_thumb']   = get_image_path($row['goods_id'], $row['goods_thumb'], true);
         $arr[$row['goods_id']]['goods_img']     = get_image_path($row['goods_id'], $row['goods_img']);
         $arr[$row['goods_id']]['url']           = build_uri('goods', array('gid' => $row['goods_id']), $row['goods_name']);
+		
+		//二次开发，增加显示商品的状态
+		$arr[$row['goods_id']]['is_new']		   = $row['is_new'];
+		$arr[$row['goods_id']]['is_hot']		   = $row['is_hot'];
+		$arr[$row['goods_id']]['is_best'] 		   = $row['is_best'];
+		$arr[$row['goods_id']]['goods_weight']	   = $row['goods_weight'];
+		$arr[$row['goods_id']]['click_count']	   = $row['click_count'];
     }
 
     if($display == 'grid')
@@ -456,6 +520,7 @@ else
             $arr[] = array();
         }
     }
+	//print_r($arr);
     $smarty->assign('goods_list', $arr);
     $smarty->assign('category',   $category);
     $smarty->assign('keywords',   htmlspecialchars(stripslashes($_REQUEST['keywords'])));
@@ -493,6 +558,7 @@ else
         'sc_ds'      => $_REQUEST['sc_ds'],
         'outstock'   => $_REQUEST['outstock']
     );
+	
     $pager['search'] = array_merge($pager['search'], $attr_arg);
 
     $pager = get_pager('search.php', $pager['search'], $count, $page, $size);
@@ -514,7 +580,7 @@ else
 
     $smarty->display('search.dwt');
 }
-
+}
 /*------------------------------------------------------ */
 //-- PRIVATE FUNCTION
 /*------------------------------------------------------ */
@@ -537,6 +603,7 @@ function is_not_null($value)
         return !empty($value);
     }
 }
+
 
 /**
  * 获得可以检索的属性

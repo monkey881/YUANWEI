@@ -13,8 +13,15 @@
   <table cellpadding="3" cellspacing="1">
     <tr>
       <th>{$lang.brand_name}</th>
-      <th>{$lang.site_url}</th>
-      <th>{$lang.brand_desc}</th>
+      <th>性别</th>
+      <th>年龄</th>
+      <th>电话</th>
+      <th>种植年龄</th>
+      <th>地址</th>
+      <th>标语</th>
+      <th>头部标语</th>
+      <th>农产品</th>
+      <th>底部标语</th>
       <th>{$lang.sort_order}</th>
       <th>{$lang.is_show}</th>
       <th>{$lang.handler}</th>
@@ -25,8 +32,16 @@
         <span style="float:right">{$brand.brand_logo}</span>
         <span onclick="javascript:listTable.edit(this, 'edit_brand_name', {$brand.brand_id})">{$brand.brand_name|escape:html}</span>
       </td>
-      <td>{$brand.site_url}</td>
-      <td align="left">{$brand.brand_desc|truncate:36}</td>
+      <td>{$brand.gend}</td>
+      <td>{$brand.age}</td>
+      <td>{$brand.tel}</td>
+      <td>{$brand.yangzhi_age}</td>
+      <td>{$brand.address}</td>
+      <td style="width: 300px;">{$brand.sologan}</td>
+      <td>{$brand.toptext}</td>
+      <td>{$brand.nongchanpin}</td>
+      <td>{$brand.bottomtext}</td>
+      
       <td align="right"><span onclick="javascript:listTable.edit(this, 'edit_sort_order', {$brand.brand_id})">{$brand.sort_order}</span></td>
       <td align="center"><img src="images/{if $brand.is_show}yes{else}no{/if}.gif" onclick="listTable.toggle(this, 'toggle_show', {$brand.brand_id})" /></td>
       <td align="center">
@@ -35,10 +50,10 @@
       </td>
     </tr>
     {foreachelse}
-    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+    <tr><td class="no-records" colspan="14">{$lang.no_records}</td></tr>
     {/foreach}
     <tr>
-      <td align="right" nowrap="true" colspan="6">
+      <td align="right" nowrap="true" colspan="10">
       {include file="page.htm"}
       </td>
     </tr>

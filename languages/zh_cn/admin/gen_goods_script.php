@@ -12,7 +12,7 @@
  * $Id: gen_goods_script.php 17217 2011-01-19 06:29:08Z liubo $
  */
 $_LANG['label_category'] = '选择商品分类：';
-$_LANG['label_brand'] = '选择商品品牌：';
+$_LANG['label_brand'] = '选择农民：';
 $_LANG['label_intro_type'] = '选择推荐类型：';
 $_LANG['label_need_image'] = '是否显示商品图片：';
 $_LANG['label_goods_num'] = '显示商品数量：';
@@ -22,7 +22,7 @@ $_LANG['label_charset'] = '选择编码：';
 $_LANG['label_sitename'] = '引用站点名称：';
 
 $_LANG['all_category'] = '所有分类';
-$_LANG['all_brand'] = '所有品牌';
+$_LANG['all_brand'] = '所有农民';
 $_LANG['all_intro_type'] = '所有推荐类型';
 $_LANG['need'] = '显示';
 $_LANG['need_not'] = '不显示';

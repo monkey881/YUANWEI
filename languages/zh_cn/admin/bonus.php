@@ -49,7 +49,7 @@ $_LANG['send'] = '发放';
 $_LANG['bonus_excel_file'] = '线下红包信息列表';
 
 $_LANG['goods_cat'] = '选择商品分类';
-$_LANG['goods_brand'] = '商品品牌';
+$_LANG['goods_brand'] = '农民';
 $_LANG['goods_key'] = '商品关键字';
 $_LANG['all_goods'] = '可选商品';
 $_LANG['send_bouns_goods'] = '发放此类型红包的商品';
