@@ -3174,6 +3174,9 @@ elseif ($action == 'kasave')
     $row = $db->getRow($sql);
    
    if($row['status']==0){
+	   
+	   //生成套餐订单
+	   
 	   show_message('套餐购买成功', '管理套餐', 'user.php?act=taocan');
    }
    elseif($row['status']==1){
